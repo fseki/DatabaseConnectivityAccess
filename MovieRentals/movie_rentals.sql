@@ -7,7 +7,7 @@ CREATE TABLE user(user_id int UNSIGNED auto_increment NOT NULL, username varchar
 password varchar(150) NOT NULL, email varchar(30) NOT NULL, fname varchar(20) NOT NULL, 
 lname varchar(20) NOT NULL, role varchar (15) NOT NULL, constraint user_pk primary key(user_id));
 
-CREATE TABLE genres(genre_id int UNSIGNED NOT NULL, genre_name varchar(20) NOT NULL, constraint genres_pk primary key(genre_id));
+CREATE TABLE genres(genre_id int UNSIGNED auto_increment NOT NULL, genre_name varchar(20) NOT NULL, constraint genres_pk primary key(genre_id));
 
 CREATE TABLE director(director_id int unsigned NOT NULL, director_fname varchar(20) NOT NULL, 
 director_lname varchar(20) NOT NULL, constraint director_pk primary key(director_id));
@@ -18,7 +18,7 @@ CREATE TABLE actor(actor_id int unsigned not null, actor_fname varchar(20) not n
 actor_dob date, actor_age int, actor_place_of_birth varchar(40), constraint actor_pk primary key(actor_id));
 
 CREATE TABLE movie(movie_id int unsigned not null, movie_title varchar(40) not null, movie_year date not null, 
-genre_id int unsigned not null, studio_id int unsigned not null, age_rating int, constraint movie_pk primary key(movie_id), 
+genre_id int unsigned auto_increment not null, studio_id int unsigned not null, age_rating int, constraint movie_pk primary key(movie_id), 
 constraint movie_genre_id_fk foreign key(genre_id) references genres(genre_id) on delete cascade on update cascade, 
 constraint movie_studio_id_fk foreign key(studio_id) references studio(studio_id) on update cascade on delete cascade);
 
