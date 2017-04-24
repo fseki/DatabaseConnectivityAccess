@@ -4,7 +4,7 @@ CREATE DATABASE movie_rentals;
 USE movie_rentals;
 
 CREATE TABLE user(user_id int UNSIGNED auto_increment NOT NULL, username varchar(20) NOT NULL UNIQUE, 
-password varchar(50) NOT NULL, email varchar(30) NOT NULL, fname varchar(20) NOT NULL, 
+password varchar(150) NOT NULL, email varchar(30) NOT NULL, fname varchar(20) NOT NULL, 
 lname varchar(20) NOT NULL, role varchar (15) NOT NULL, constraint user_pk primary key(user_id));
 
 CREATE TABLE genres(genre_id int UNSIGNED NOT NULL, genre_name varchar(20) NOT NULL, constraint genres_pk primary key(genre_id));
@@ -35,11 +35,16 @@ constraint actors_movie_actor_id_fk foreign key(actor_id) references actor(actor
 constraint actors_movie_movie_id_fk foreign key(movie_id) references movie(movie_id) on update cascade on delete cascade);
 
 /* Data insertion */
-INSERT INTO user values(1, "narf666", "narf666Pass", "fxs5520@rit.edu", "Fran", "Seki", "Administrator");
-INSERT INTO user values(2, "micaubica", "micaubicaPass", "mxp1111@rit.edu", "Marko", "Parac", "Administrator");
-INSERT INTO user values(3, "starboy", "starboyPass", "fxs5520@rit.edu", "Matija", "Ozetski", "Administrator");
-INSERT INTO user values(4, "chenga", "chengaPass", "fxs5520@rit.edu", "Adi", "Cengic", "Administrator");
-INSERT INTO user values(5, "zivac", "zivacPass", "mxz9982@rit.edu", "Marko", "Zivko", "Administrator");
+INSERT INTO user values(1, "narf666", "7c296ead0000d944de8f189c011f2ddeebe00ffd50004f456ef5205edf8ef5205301aeb67762f88d15d4290be28df57ef3b167ea88107e890f632c6a5b44bcef", 
+"fxs5520@rit.edu", "Fran", "Seki", "Administrator"); /*pass: narf666Pass */
+INSERT INTO user values(2, "micaubica", "2133608c91e2466d33f07928be0d80d8dd249889f28cbd002828a9145a10076288967e3ec8b71780b19af3d002c86e1e74741fcd0232da5102ac07654ae03be8",
+ "mxp1111@rit.edu", "Marko", "Parac", "Administrator"); /*pass: micaubicaPass */
+INSERT INTO user values(3, "starboy", "af54f6aa5c8bbb51ad92e97782e7f2bf1db6f25a8d8d09f07c83e88a531a0adf19ee16bec14c0714bdf461abc4e52c9c8657355ee34a703d861808039d155205",
+ "fxs5520@rit.edu", "Matija", "Ozetski", "Administrator"); /*pass: starboyPass */
+INSERT INTO user values(4, "chenga", "564a82e87d8d1095a0f7a7e79645babbd0dc09727cbad124bb928a98af70affb98b3ad1541237a62489198b65b209919b4bf8961f5f46399b6cd7910381442ba",
+ "fxs5520@rit.edu", "Adi", "Cengic", "Administrator"); /*pass: chengaPass */
+INSERT INTO user values(5, "zivac", "e859146dc59d3f85379bfe376ff7357131102e3b78775bffa57a2abd62cb0d2a8da01172cabc1a9cc80fe2d6564e1d52604f24f72ca38f30a76116002c67b300",
+ "mxz9982@rit.edu", "Marko", "Zivko", "Administrator"); /*pass: zivacPass */
 
 INSERT INTO genres values(1, "Thriller");
 INSERT INTO genres values(2, "Horror");

@@ -19,7 +19,7 @@ import java.util.*;
 public class MovieRentalsTester {
 
     public static void main(String[] args) {
-
+        
         ArrayList<ArrayList<String>> data;
         Scanner in = new Scanner(System.in);
 
@@ -55,6 +55,5 @@ public class MovieRentalsTester {
         
         myDatabase.close();
 
-        //equipment object needed for calling printEquipment method
     }
 }
