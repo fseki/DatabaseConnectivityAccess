@@ -49,6 +49,10 @@ public class MovieRentalsTester {
         MovieRentalsDatabase myDatabase = new MovieRentalsDatabase(userName, password, dbServer, dbPort, dbName);
 
         myDatabase.connect();
+        
+        User user = new User(myDatabase);
+        user.login("narf666", "narf666Pass");
+        
         myDatabase.close();
 
         //equipment object needed for calling printEquipment method

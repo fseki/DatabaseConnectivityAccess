@@ -3,9 +3,9 @@
 CREATE DATABASE movie_rentals;
 USE movie_rentals;
 
-CREATE TABLE user(user_id int UNSIGNED auto_increment NOT NULL, username varchar(20) NOT NULL, 
+CREATE TABLE user(user_id int UNSIGNED auto_increment NOT NULL, username varchar(20) NOT NULL UNIQUE, 
 password varchar(50) NOT NULL, email varchar(30) NOT NULL, fname varchar(20) NOT NULL, 
-lname varchar(20) NOT NULL,role varchar (10) NOT NULL, constraint user_pk primary key(user_id));
+lname varchar(20) NOT NULL, role varchar (15) NOT NULL, constraint user_pk primary key(user_id));
 
 CREATE TABLE genres(genre_id int UNSIGNED NOT NULL, genre_name varchar(20) NOT NULL, constraint genres_pk primary key(genre_id));
 
@@ -35,11 +35,11 @@ constraint actors_movie_actor_id_fk foreign key(actor_id) references actor(actor
 constraint actors_movie_movie_id_fk foreign key(movie_id) references movie(movie_id) on update cascade on delete cascade);
 
 /* Data insertion */
-INSERT INTO user values(1, "narf666", "test123", "fxs5520@rit.edu", "Fran", "Seki", "administrator");
-INSERT INTO user values(1, "micaubica", "test123", "mxp1111@rit.edu", "Marko", "Parac", "administrator");
-INSERT INTO user values(1, "starboy", "test123", "fxs5520@rit.edu", "Matija", "Ozetksi", "administrator");
-INSERT INTO user values(1, "chenga", "test123", "fxs5520@rit.edu", "Adi", "Cengic", "administrator");
-INSERT INTO user values(1, "zivac", "test123", "mxz9982@rit.edu", "Marko", "Zivko", "administrator");
+INSERT INTO user values(1, "narf666", "narf666Pass", "fxs5520@rit.edu", "Fran", "Seki", "Administrator");
+INSERT INTO user values(2, "micaubica", "micaubicaPass", "mxp1111@rit.edu", "Marko", "Parac", "Administrator");
+INSERT INTO user values(3, "starboy", "starboyPass", "fxs5520@rit.edu", "Matija", "Ozetski", "Administrator");
+INSERT INTO user values(4, "chenga", "chengaPass", "fxs5520@rit.edu", "Adi", "Cengic", "Administrator");
+INSERT INTO user values(5, "zivac", "zivacPass", "mxz9982@rit.edu", "Marko", "Zivko", "Administrator");
 
 INSERT INTO genres values(1, "Thriller");
 INSERT INTO genres values(2, "Horror");
