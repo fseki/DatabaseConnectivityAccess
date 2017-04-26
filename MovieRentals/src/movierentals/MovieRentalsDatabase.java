@@ -253,7 +253,51 @@ public class MovieRentalsDatabase {
         }
         return pStatement;
     }
+    
+    /*
+     * Method that is used to get data from the databse in cases where a select from
+     * multiple tables is being performed
+     * Allows for the user to specify the number of columns based on the query
+     * Uses prepared statements for security
+     * @param statement, Query to be executed
+     * @param values, Values to be bound to the statement
+     * @param numCols, Number of columns involved in the statement
+    */
+    public ArrayList<ArrayList<String>> getDataWithSpecificNumCols(String statement, ArrayList<String> values, int numCols){
+        ArrayList<ArrayList<String>> data = null;
+        int m = 0;
 
+        try {
+            PreparedStatement prepStatement = prepare(statement, values);
+            resultSet = prepStatement.executeQuery();
+            data = new ArrayList<ArrayList<String>>();
+
+            boolean row = resultSet.next();
+            if (row == false) {
+                System.out.println("EMPTY SET: There is no data!");
+            } else {
+                //adds resultSet data to the array
+                while (row) {
+                    data.add(new ArrayList<String>());
+                    for (int i = 1; i <= numCols; i++) {
+                        resultSet.getString(i);
+                        data.get(m).add(resultSet.getString(i));
+                    }
+                    row = resultSet.next();
+                    m++;
+                }
+            }
+            prepStatement.close();
+        } catch (SQLException se) {
+            //System.out.println("Something went wrong: Could not get the data.");
+            se.printStackTrace();
+        } catch (Exception e) {
+            //System.out.println("Something went wrong: Could not get the data.");
+            e.printStackTrace();
+        }
+        return data;
+    }
+    
     /*
 	 * Method that queries the database with the given query, using a prepared statement
 	 * Also stores query results into an array

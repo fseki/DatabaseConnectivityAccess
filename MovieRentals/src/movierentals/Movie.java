@@ -41,12 +41,12 @@ public class Movie {
         String query = "select movie_id, movie_title, movie_year, genres.genre_name, age_rating from \n" +
             "movie JOIN genres ON movie.genre_id = genres.genre_id";
         
-        data = db.getData(query, values);
-        movie_id = Integer.parseInt(data.get(1).get(0));
-        title = data.get(1).get(1);
-        release_date = data.get(1).get(2);
-        genre = data.get(1).get(3);
-        age_rating = Integer.parseInt(data.get(1).get(4));
+        data = db.getDataWithSpecificNumCols(query, values, 5);
+        movie_id = Integer.parseInt(data.get(0).get(0));
+        title = data.get(0).get(1);
+        release_date = data.get(0).get(2);
+        genre = data.get(0).get(3);
+        age_rating = Integer.parseInt(data.get(0).get(4));
         
         return data;
     }
@@ -57,16 +57,15 @@ public class Movie {
      * @param filter, Will be what the user is looking for - i.e. Title, Genre, Studio etc.
      * @param searchTerm, The search term that the user entered in the field
     */
-    public ArrayList<ArrayList<String>> fetchFromSearch(MovieRentalsDatabase db, String filter, String searchTerm){
+    public ArrayList<ArrayList<String>> fetchFromSearch(MovieRentalsDatabase db, String searchTerm){
          ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
          ArrayList<String> values = new ArrayList<String>();
-         values.add(filter);
          values.add(searchTerm);
          
          String query = "select movie_title, movie_year, genres.genre_name, age_rating from \n" +
-            "movie JOIN genres ON movie.genre_id = genres.genre_id WHERE ? LIKE ?";
+            "movie JOIN genres ON movie.genre_id = genres.genre_id WHERE movie_title LIKE ?";
          
-         data = db.getData(query, values);
+         data = db.getDataWithSpecificNumCols(query, values, 4);
          
          return data;
     }
@@ -121,5 +120,20 @@ public class Movie {
     
     public void getMovieInfo(String movieName){
         
+    }
+    
+    public String printMovies(ArrayList<ArrayList<String>> data){
+        String result = "";
+        
+        if (data != null && data.size() > 0){
+            for (int i = 0; i < data.size(); i++){
+                for (int m = 0; m < data.get(i).size(); m++){
+                    result += data.get(i).get(m) + ", ";
+                }
+                result += "\n";
+            }
+        }
+        
+        return result;
     }
 }

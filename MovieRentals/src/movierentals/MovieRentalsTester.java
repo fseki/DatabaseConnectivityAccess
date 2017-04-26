@@ -54,7 +54,12 @@ public class MovieRentalsTester {
         user.login("narf666", "narf666Pass");
         
         Movie movie = new Movie();
-        data = movie.fetchAll(myDatabase);
+        //data = movie.fetchAll(myDatabase);
+        data = movie.fetchFromSearch(myDatabase, "%s%");
+        System.out.println(movie.printMovies(data));
+        
+        UtilitiesClass util = new UtilitiesClass("movies");
+        util.exportMoviesToFile(data);
         
         myDatabase.close();
 

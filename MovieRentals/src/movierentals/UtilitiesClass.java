@@ -12,8 +12,14 @@ public class UtilitiesClass {
     private ArrayList<ArrayList<String>> data;
     private File fileToExport;
     
-    public UtilitiesClass(File newFile){
-        fileToExport = newFile;
+    public UtilitiesClass(String newFile){
+        if (newFile.contains(".txt")){
+            fileToExport = new File(newFile);
+        }
+        else{
+            newFile += ".txt";
+            fileToExport = new File(newFile);
+        }
     }
     
     public void exportMoviesToFile(ArrayList<ArrayList<String>> dataToExport){
@@ -24,18 +30,17 @@ public class UtilitiesClass {
            
             for (int i = 0; i < data.size(); i++){
                 for (int m = 0; m < data.get(i).size(); m++){
-                    pw.println(data.get(i).get(m) + "\t");
+                    pw.print(data.get(i).get(m) + "\t");
                     pw.flush();
                 }
+                pw.println();
+                pw.flush();
             }
             pw.close();
         
         }
         catch (FileNotFoundException fnf){
             System.out.println("The file to which you want to export has not been found.");
-        }
-        catch (IOException ioe){
-            ioe.printStackTrace();
         }
     }
     
