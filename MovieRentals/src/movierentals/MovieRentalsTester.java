@@ -54,7 +54,7 @@ public class MovieRentalsTester {
         user.login("narf666", "narf666Pass");
         
         Movie movie = new Movie();
-        System.out.println(movie.getMovieInfo(myDatabase, "Interstellar"));
+        System.out.println(movie.getMovieInfo(myDatabase, "Sinister"));
         
         myDatabase.close();
 
