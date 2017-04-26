@@ -243,13 +243,22 @@ public class MovieRentalsDatabase {
         try {
             pStatement = connection.prepareStatement(statement);
             for (int i = 0; i < values.size(); i++) {
-                pStatement.setString(i + 1, values.get(i));
+                try{
+                    int n = Integer.parseInt(values.get(i));
+                    pStatement.setInt(i + 1, n);
+                }
+                catch (NumberFormatException nfe){
+                    pStatement.setString(i + 1, values.get(i));
+                }
+                
             }
 
         } catch (SQLException se) {
-            System.out.println("An error occurred...");
+            //System.out.println("An error occurred...");
+            se.printStackTrace();
         } catch (Exception e) {
-            System.out.println("An error occurred...");
+            //System.out.println("An error occurred...");
+            e.printStackTrace();
         }
         return pStatement;
     }
