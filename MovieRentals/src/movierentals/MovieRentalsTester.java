@@ -53,6 +53,9 @@ public class MovieRentalsTester {
         User user = new User(myDatabase);
         user.login("narf666", "narf666Pass");
         
+        Movie movie = new Movie();
+        data = movie.fetchAll(myDatabase);
+        
         myDatabase.close();
 
     }

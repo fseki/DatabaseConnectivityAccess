@@ -274,6 +274,7 @@ public class MovieRentalsDatabase {
             //needed for column names
             ResultSetMetaData tmpMeta = resultSet.getMetaData();
             String tableName = tmpMeta.getTableName(1);
+            System.out.println("table name: " + tableName);
 
             ResultSet result = metaData.getColumns(null, null, tableName, null);
 
@@ -302,9 +303,11 @@ public class MovieRentalsDatabase {
             result.close();
             prepStatement.close();
         } catch (SQLException se) {
-            System.out.println("Something went wrong: Could not get the data.");
+            //System.out.println("Something went wrong: Could not get the data.");
+            se.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Something went wrong: Could not get the data.");
+            //System.out.println("Something went wrong: Could not get the data.");
+            e.printStackTrace();
         }
         return data;
     }
