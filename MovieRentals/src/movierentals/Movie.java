@@ -118,4 +118,8 @@ public class Movie {
             System.out.println("FAILED TO DELETE");
         }
     }
+    
+    public void getMovieInfo(String movieName){
+        
+    }
 }
