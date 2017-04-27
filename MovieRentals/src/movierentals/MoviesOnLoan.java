@@ -45,7 +45,7 @@ public class MoviesOnLoan {
         String query2 = "SELECT movie_id FROM movie WHERE movie_title = ?";
         values.add(movieName);
         ArrayList<ArrayList<String>> data = db.getDataWithSpecificNumCols(query2, values, 1);
-        movie_id = Integer.parseInt(data.get(0).get(1));
+        movie_id = Integer.parseInt(data.get(0).get(0));
       
         long currentTime = System.currentTimeMillis();
         
@@ -64,7 +64,7 @@ public class MoviesOnLoan {
         values.add("" + movie_id);
         values.add("" + user_id);
         values.add(date_due);
-        values.add("False");
+        values.add("" + 0);
         
         boolean success = db.setData(query, values);
         
@@ -84,8 +84,7 @@ public class MoviesOnLoan {
      * @param userId, Id of the user that is returning the movie
     */
     public void returnMovie(MovieRentalsDatabase db, String movieName, int userId){
-        String query = "UPDATE movies_on_loan SET returned = true WHERE user_id = ? "
-                + "&& movie_id = ?";
+        String query = "DELETE FROM movies_on_loan WHERE user_id = ? && movie_id = ?";
         
         ArrayList<ArrayList<String>> data;
         ArrayList<String> values = new ArrayList<String>();
@@ -94,7 +93,7 @@ public class MoviesOnLoan {
         user_id = userId;
         
         String query2 = "SELECT movie_id FROM movie WHERE movie_title = ?";
-        data = db.getDataWithSpecificNumCols(query, values, 1);
+        data = db.getDataWithSpecificNumCols(query2, values, 1);
         movie_id = Integer.parseInt(data.get(0).get(0));
         
         values.clear();

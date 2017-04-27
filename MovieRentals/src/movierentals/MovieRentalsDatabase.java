@@ -386,9 +386,11 @@ public class MovieRentalsDatabase {
             }
             prepStatement.close();
         } catch (SQLException se) {
-            System.out.println("Could not update the database.");
+            //System.out.println("Could not update the database.");
+            se.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Could not update the database.");
+            //System.out.println("Could not update the database.");
+            e.printStackTrace();
         }
         return successful;
     }
