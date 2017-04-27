@@ -1,6 +1,5 @@
 package movierentals;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Movie {
@@ -224,48 +223,7 @@ public class Movie {
         }
         return output;
     }
-    
-    /*
-     * Method which performs updates on the database in order to display a movie
-     * as rented, and save information about the user which rented the movie
-     * @param db, Database object
-     * @param movieName, Name of the movie to be rented
-     * @param forWeek, Whether the user wants to rent the movie for a week or day
-     * @param userId, Id of the user that is renting the movie
-    */
-    public void rentMovie(MovieRentalsDatabase db, String movieName, boolean forWeek, int userId){
-        String query = "INSERT INTO movies_on_loan VALUES(?, ?, ?, ?)";
-        ArrayList<String> values = new ArrayList<String>();
-        //movie_id, user_id, date-due, returned
-        
-        String query2 = "SELECT movie_id FROM movie WHERE movie_title = ?";
-        values.add(movieName);
-        ArrayList<ArrayList<String>> data = db.getDataWithSpecificNumCols(query2, values, 1);
-        movie_id = Integer.parseInt(data.get(0).get(1));
-        
-        String dateToReturn = "";
-        long currentTime = System.currentTimeMillis();
-        
-        if (forWeek){
-            currentTime += 604800000; //adds a week
-        }
-        else{
-            currentTime += 86400000; //adds a day
-        }
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date(System.currentTimeMillis());
-        dateToReturn = sdf.format(date);
-        
-        values.clear();
-        values.add("" + movie_id);
-        values.add("" + userId);
-        values.add(dateToReturn);
-        values.add("False");
-        
-        boolean success = db.setData(query, values);
-    }
-    
+     
     public String printMovies(ArrayList<ArrayList<String>> data){
         String result = "";
         
