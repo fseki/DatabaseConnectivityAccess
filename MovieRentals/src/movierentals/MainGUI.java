@@ -42,6 +42,12 @@ public class MainGUI extends javax.swing.JPanel {
         jMenuBar4 = new javax.swing.JMenuBar();
         jMenu7 = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
+        jMenuBar6 = new javax.swing.JMenuBar();
+        jMenu11 = new javax.swing.JMenu();
+        jMenu12 = new javax.swing.JMenu();
+        jMenuBar7 = new javax.swing.JMenuBar();
+        jMenu13 = new javax.swing.JMenu();
+        jMenu14 = new javax.swing.JMenu();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
         jpSearch = new javax.swing.JPanel();
@@ -54,6 +60,8 @@ public class MainGUI extends javax.swing.JPanel {
         jtMovies = new javax.swing.JTable();
         jMenuBar5 = new javax.swing.JMenuBar();
         jMenu9 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
 
         jMenu1.setText("File");
@@ -84,6 +92,18 @@ public class MainGUI extends javax.swing.JPanel {
 
         jMenu8.setText("Edit");
         jMenuBar4.add(jMenu8);
+
+        jMenu11.setText("File");
+        jMenuBar6.add(jMenu11);
+
+        jMenu12.setText("Edit");
+        jMenuBar6.add(jMenu12);
+
+        jMenu13.setText("File");
+        jMenuBar7.add(jMenu13);
+
+        jMenu14.setText("Edit");
+        jMenuBar7.add(jMenu14);
 
         jInternalFrame1.setVisible(true);
 
@@ -190,6 +210,23 @@ public class MainGUI extends javax.swing.JPanel {
         );
 
         jMenu9.setText("File");
+
+        jMenuItem2.setText("Export");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem2);
+
+        jMenuItem3.setText("Exit");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem3);
+
         jMenuBar5.add(jMenu9);
 
         jMenu10.setText("Edit");
@@ -233,11 +270,23 @@ public class MainGUI extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jbGoActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
+    private javax.swing.JMenu jMenu12;
+    private javax.swing.JMenu jMenu13;
+    private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -251,7 +300,11 @@ public class MainGUI extends javax.swing.JPanel {
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuBar jMenuBar4;
     private javax.swing.JMenuBar jMenuBar5;
+    private javax.swing.JMenuBar jMenuBar6;
+    private javax.swing.JMenuBar jMenuBar7;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;

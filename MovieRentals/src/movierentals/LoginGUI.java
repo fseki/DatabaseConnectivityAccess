@@ -169,7 +169,7 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         });
 
-        MovieRentalsDatabase myDatabase = new MovieRentalsDatabase("root", "AAwz2a8m", "localhost", "3306", "movie_rentals");
+        MovieRentalsDatabase myDatabase = new MovieRentalsDatabase("root", "pass", "localhost", "3306", "movie_rentals");
 
         myDatabase.connect();
 
@@ -201,7 +201,39 @@ public class LoginGUI extends javax.swing.JFrame {
                 gui.repaint();
                 regButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        user.register(RegisterGUI.textField1.getText(), RegisterGUI.textField2.getText(), RegisterGUI.textField3.getText(), RegisterGUI.textField4.getText(), RegisterGUI.textField5.getText(), RegisterGUI.textField6.getText());
+                        String username = RegisterGUI.textField1.getText().trim();
+                        String password = RegisterGUI.textField6.getText().trim();
+                        String confirmPassword = RegisterGUI.textField2.getText().trim();
+                        String email = RegisterGUI.textField3.getText().trim();
+                        String fName = RegisterGUI.textField4.getText().trim();
+                        String lName = RegisterGUI.textField5.getText().trim();
+                        
+                        String error = "No data entered";
+                        
+                        if (username.equals("") || username.equals(error)){
+                            RegisterGUI.textField1.setText(error);
+                        }
+                        else if (password.equals("") || password.equals(error)){
+                            RegisterGUI.textField6.setText(error);
+                        }
+                        else if (confirmPassword.equals("") || confirmPassword.equals(error)){
+                            RegisterGUI.textField2.setText(error);
+                        }
+                        else if (email.equals("") || email.equals(error)){
+                            RegisterGUI.textField3.setText(error);
+                        }
+                        else if (fName.equals("") || fName.equals(error)){
+                            RegisterGUI.textField4.setText(error);
+                        }
+                        else if (lName.equals("") || lName.equals(error)){
+                            RegisterGUI.textField5.setText(error);
+                        }
+                        else {
+                            System.out.println(password);
+                            System.out.println(confirmPassword);
+                            user.register(username, password, confirmPassword, email, fName, lName);
+                        }
+                        
                     }
                 });
 

@@ -78,8 +78,7 @@ public class User {
 
     public boolean register(String newUsername, String newPassword, String newConfPassword, String newEmail, String newFname, String newLname) {
         username = newUsername;
-        password = hashPassword(newPassword, SALT);
-        confPassword = hashPassword(newConfPassword, SALT);
+        
         email = newEmail;
         fName = newFname;
         lName = newLname;
@@ -87,7 +86,7 @@ public class User {
 
         boolean success = false;
         
-        if(!(password.equals(confPassword))) {
+        if(!(newPassword.equals(newConfPassword))) {
             JFrame jfwrong = new JFrame();
             JPanel jpwrong = new JPanel();
             JLabel jlwrong = new JLabel("Passwords do not match");
@@ -97,6 +96,10 @@ public class User {
             jfwrong.setLocationRelativeTo(null);
             jfwrong.pack();
             return false;
+        }
+        else{
+            password = hashPassword(newPassword, SALT);
+            confPassword = hashPassword(newConfPassword, SALT);
         }
 
         ArrayList<String> values = new ArrayList<String>();

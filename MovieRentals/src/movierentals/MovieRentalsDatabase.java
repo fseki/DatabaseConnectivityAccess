@@ -5,8 +5,10 @@
  */
 package movierentals;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import java.sql.*;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 /**
  * Class with methods and attributes to connect to a database, manipulate
@@ -385,10 +387,18 @@ public class MovieRentalsDatabase {
                 successful = true;
             }
             prepStatement.close();
-        } catch (SQLException se) {
-            //System.out.println("Could not update the database.");
-            se.printStackTrace();
-        } catch (Exception e) {
+        }
+        catch (SQLException se) {
+            try{
+                com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException violationEx = (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException)se;
+                JOptionPane.showMessageDialog(null, "Username already in use.\nPlease select another username.");
+            }
+            catch (ClassCastException cce){
+                se.printStackTrace();
+            }
+        } 
+        
+        catch (Exception e) {
             //System.out.println("Could not update the database.");
             e.printStackTrace();
         }
