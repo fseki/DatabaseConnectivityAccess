@@ -4,6 +4,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /*
  * Class whose object handles the business side of the login and
@@ -14,15 +17,16 @@ public class User {
     private int user_id;
     private String username;
     private String password;
+    private String confPassword;
     private String email;
     private String fName;
     private String lName;
     private String role;
-    
+
     private MovieRentalsDatabase database;
-    
+
     private final String SALT = "random";
-    
+
     public User(MovieRentalsDatabase db) {
         database = db;
     }
@@ -71,17 +75,30 @@ public class User {
 
         return valid;
     }
-    
-    public void register(String newUsername, String newPassword, String newEmail, String newFname, String newLname){
+
+    public boolean register(String newUsername, String newPassword, String newConfPassword, String newEmail, String newFname, String newLname) {
         username = newUsername;
         password = hashPassword(newPassword, SALT);
+        confPassword = hashPassword(newConfPassword, SALT);
         email = newEmail;
         fName = newFname;
         lName = newLname;
         role = "Public";
-        
+
         boolean success = false;
         
+        if(!(password.equals(confPassword))) {
+            JFrame jfwrong = new JFrame();
+            JPanel jpwrong = new JPanel();
+            JLabel jlwrong = new JLabel("Passwords do not match");
+            jpwrong.add(jlwrong);
+            jfwrong.add(jpwrong);
+            jfwrong.setVisible(true);
+            jfwrong.setLocationRelativeTo(null);
+            jfwrong.pack();
+            return false;
+        }
+
         ArrayList<String> values = new ArrayList<String>();
         values.add(username);
         values.add(password);
@@ -89,35 +106,38 @@ public class User {
         values.add(fName);
         values.add(lName);
         values.add(role);
+
         
+
         success = database.setData("INSERT INTO user(username, password, email, fname, lname, role) VALUES(?, ?, ?, ?, ?, ?)", values);
-        
-        if (success){
+
+        if (success) {
             System.out.println("Successfully registered");
-        }
-        else{
+            return true;
+        } else {
             System.out.println("Failed to register");
+            return false;
         }
+
     }
-    
-    public String hashPassword(String passwordToHash, String salt){
+
+    public String hashPassword(String passwordToHash, String salt) {
         String hashedPassword = null;
-        try{
+        try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
             md.update(salt.getBytes("UTF-8"));
             byte[] bytes = md.digest(passwordToHash.getBytes("UTF-8"));
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++){
+            for (int i = 0; i < bytes.length; i++) {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
             hashedPassword = sb.toString();
-        }
-        catch (NoSuchAlgorithmException nsa){
+        } catch (NoSuchAlgorithmException nsa) {
             nsa.printStackTrace();
-        }
-        catch (UnsupportedEncodingException ue){
+        } catch (UnsupportedEncodingException ue) {
             ue.printStackTrace();
         }
         return hashedPassword;
+
     }
 }
