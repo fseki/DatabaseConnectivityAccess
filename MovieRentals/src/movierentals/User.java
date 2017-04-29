@@ -78,30 +78,32 @@ public class User {
 
     public boolean register(String newUsername, String newPassword, String newConfPassword, String newEmail, String newFname, String newLname) {
         username = newUsername;
-        
+
         email = newEmail;
         fName = newFname;
         lName = newLname;
         role = "Public";
 
         boolean success = false;
-        
-        if(!(newPassword.equals(newConfPassword))) {
-            JFrame jfwrong = new JFrame();
-            JPanel jpwrong = new JPanel();
-            JLabel jlwrong = new JLabel("Passwords do not match");
-            jpwrong.add(jlwrong);
-            jfwrong.add(jpwrong);
-            jfwrong.setVisible(true);
-            jfwrong.setLocationRelativeTo(null);
-            jfwrong.pack();
-            return false;
-        }
-        else{
-            password = hashPassword(newPassword, SALT);
-            confPassword = hashPassword(newConfPassword, SALT);
-        }
 
+        if (!newConfPassword.equals("")) {
+            
+            if (!(newPassword.equals(newConfPassword))) {
+                JFrame jfwrong = new JFrame();
+                JPanel jpwrong = new JPanel();
+                JLabel jlwrong = new JLabel("Passwords do not match");
+                jpwrong.add(jlwrong);
+                jfwrong.add(jpwrong);
+                jfwrong.setVisible(true);
+                jfwrong.setLocationRelativeTo(null);
+                jfwrong.pack();
+                return false;
+            } else {
+                password = hashPassword(newPassword, SALT);
+                confPassword = hashPassword(newConfPassword, SALT);
+            }
+            
+        }
         ArrayList<String> values = new ArrayList<String>();
         values.add(username);
         values.add(password);
@@ -109,8 +111,6 @@ public class User {
         values.add(fName);
         values.add(lName);
         values.add(role);
-
-        
 
         success = database.setData("INSERT INTO user(username, password, email, fname, lname, role) VALUES(?, ?, ?, ?, ?, ?)", values);
 
@@ -143,4 +143,6 @@ public class User {
         return hashedPassword;
 
     }
+    
+    
 }

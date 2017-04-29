@@ -12,6 +12,10 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import static movierentals.ConnectionGUI.db_name_txt;
+import static movierentals.ConnectionGUI.port_num_txt;
+import static movierentals.ConnectionGUI.serv_name_txt;
+import static movierentals.ConnectionGUI.wb_pass_txt;
 import static movierentals.RegisterGUI.regButton;
 
 /**
@@ -135,52 +139,22 @@ public class LoginGUI extends javax.swing.JFrame {
     private static java.awt.TextField userField;
     // End of variables declaration//GEN-END:variables
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        LoginGUI gui = new LoginGUI();
+    public void main() {
+        LoginGUI LogGui = new LoginGUI();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                gui.setVisible(true);
-                gui.setLocationRelativeTo(null);
+                LogGui.setVisible(true);
             }
         });
 
-        MovieRentalsDatabase myDatabase = new MovieRentalsDatabase("root", "pass", "localhost", "3306", "movie_rentals");
-
-        myDatabase.connect();
-
-        User user = new User(myDatabase);
-
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (user.login(userField.getText(), passField.getText())) {
-                    gui.setContentPane(new MainGUI());
-                    gui.revalidate();
-                    gui.repaint();
+                if (ConnectionGUI.getUser().login(userField.getText(), passField.getText())) {
+                    ConnectionGUI.getFrame().setContentPane(new MainGUI());
+                    ConnectionGUI.getFrame().revalidate();
+                    ConnectionGUI.getFrame().repaint();
                 } else {
                     JFrame jfwrong = new JFrame();
                     JPanel jpwrong = new JPanel();
@@ -196,9 +170,9 @@ public class LoginGUI extends javax.swing.JFrame {
 
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                gui.setContentPane(new RegisterGUI());
-                gui.revalidate();
-                gui.repaint();
+                ConnectionGUI.getFrame().setContentPane(new RegisterGUI());
+                ConnectionGUI.getFrame().revalidate();
+                ConnectionGUI.getFrame().repaint();
                 regButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         String username = RegisterGUI.textField1.getText().trim();
@@ -207,33 +181,27 @@ public class LoginGUI extends javax.swing.JFrame {
                         String email = RegisterGUI.textField3.getText().trim();
                         String fName = RegisterGUI.textField4.getText().trim();
                         String lName = RegisterGUI.textField5.getText().trim();
-                        
+
                         String error = "No data entered";
-                        
-                        if (username.equals("") || username.equals(error)){
+
+                        if (username.equals("") || username.equals(error)) {
                             RegisterGUI.textField1.setText(error);
-                        }
-                        else if (password.equals("") || password.equals(error)){
+                        } else if (password.equals("") || password.equals(error)) {
                             RegisterGUI.textField6.setText(error);
-                        }
-                        else if (confirmPassword.equals("") || confirmPassword.equals(error)){
+                        } else if (confirmPassword.equals("") || confirmPassword.equals(error)) {
                             RegisterGUI.textField2.setText(error);
-                        }
-                        else if (email.equals("") || email.equals(error)){
+                        } else if (email.equals("") || email.equals(error)) {
                             RegisterGUI.textField3.setText(error);
-                        }
-                        else if (fName.equals("") || fName.equals(error)){
+                        } else if (fName.equals("") || fName.equals(error)) {
                             RegisterGUI.textField4.setText(error);
-                        }
-                        else if (lName.equals("") || lName.equals(error)){
+                        } else if (lName.equals("") || lName.equals(error)) {
                             RegisterGUI.textField5.setText(error);
-                        }
-                        else {
+                        } else {
                             System.out.println(password);
                             System.out.println(confirmPassword);
-                            user.register(username, password, confirmPassword, email, fName, lName);
+                            ConnectionGUI.getUser().register(username, password, confirmPassword, email, fName, lName);
                         }
-                        
+
                     }
                 });
 
