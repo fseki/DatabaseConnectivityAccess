@@ -56,6 +56,7 @@ public class LoginGUI extends javax.swing.JFrame {
         label2.setText("Password");
 
         loginButton.setLabel("Login");
+        loginButton.setName(""); // NOI18N
 
         registerButton.setLabel("Register");
 
@@ -154,7 +155,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 if (ConnectionGUI.getUser().login(userField.getText(), passField.getText())) {
                     ConnectionGUI.getFrame().setContentPane(new MainGUI());
                     ConnectionGUI.getFrame().revalidate();
-                    ConnectionGUI.getFrame().repaint();
+                    ConnectionGUI.getFrame().repaint();   
                 } else {
                     JFrame jfwrong = new JFrame();
                     JPanel jpwrong = new JPanel();
@@ -201,10 +202,8 @@ public class LoginGUI extends javax.swing.JFrame {
                             System.out.println(confirmPassword);
                             ConnectionGUI.getUser().register(username, password, confirmPassword, email, fName, lName);
                         }
-
                     }
                 });
-
             }
         });
 

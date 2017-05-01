@@ -165,10 +165,13 @@
         </Component>
         <Component class="javax.swing.JLabel" name="db_conn_title">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Connecting to database"/>
+            <Property name="text" type="java.lang.String" value="Connecting to the database"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="db_name_txt">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="movie_rentals"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>

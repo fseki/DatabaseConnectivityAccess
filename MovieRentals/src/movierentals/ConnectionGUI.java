@@ -65,7 +65,9 @@ public class ConnectionGUI extends javax.swing.JFrame {
 
         db_name.setText("Database name:");
 
-        db_conn_title.setText("Connecting to database");
+        db_conn_title.setText("Connecting to the database");
+
+        db_name_txt.setText("movie_rentals");
 
         conn_btn.setText("Connect");
 
@@ -210,6 +212,8 @@ public class ConnectionGUI extends javax.swing.JFrame {
                     LoginGUI loginGUI = new LoginGUI();
                     loginGUI.setVisible(true);
                     loginGUI.setLocationRelativeTo(null);
+                    connGUI.setVisible(false);
+                    connGUI.dispose();
                 }else{
                     JFrame jfwrong = new JFrame();
                     JPanel jpwrong = new JPanel();
