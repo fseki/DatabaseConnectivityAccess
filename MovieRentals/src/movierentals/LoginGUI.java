@@ -155,7 +155,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 if (ConnectionGUI.getUser().login(userField.getText(), passField.getText())) {
                     ConnectionGUI.getFrame().setContentPane(new MainGUI());
                     ConnectionGUI.getFrame().revalidate();
-                    ConnectionGUI.getFrame().repaint();   
+                    ConnectionGUI.getFrame().repaint(); 
                 } else {
                     JFrame jfwrong = new JFrame();
                     JPanel jpwrong = new JPanel();

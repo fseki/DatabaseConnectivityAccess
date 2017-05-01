@@ -57,7 +57,7 @@ public class MoviesOnLoan {
         }
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date(System.currentTimeMillis());
+        Date date = new Date(currentTime);
         date_due = sdf.format(date);
         
         values.clear();
