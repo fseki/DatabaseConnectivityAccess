@@ -209,9 +209,7 @@ public class ConnectionGUI extends javax.swing.JFrame {
                 MovieRentalsDatabase myDatabase = new MovieRentalsDatabase(ConnectionGUI.wb_name_txt.getText(), wb_pass_txt.getText(), serv_name_txt.getText(), port_num_txt.getText(), db_name_txt.getText());
                 if (myDatabase.connect()) {
                     user = new User(myDatabase);
-                    LoginGUI loginGUI = new LoginGUI();
-                    loginGUI.setVisible(true);
-                    loginGUI.setLocationRelativeTo(null);
+                    LoginGUI.main();
                     connGUI.setVisible(false);
                     connGUI.dispose();
                 }else{

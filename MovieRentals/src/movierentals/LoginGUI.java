@@ -140,8 +140,9 @@ public class LoginGUI extends javax.swing.JFrame {
     private static java.awt.TextField userField;
     // End of variables declaration//GEN-END:variables
 
-    public void main() {
+    public static void main() {
         LoginGUI LogGui = new LoginGUI();
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -153,9 +154,14 @@ public class LoginGUI extends javax.swing.JFrame {
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (ConnectionGUI.getUser().login(userField.getText(), passField.getText())) {
-                    ConnectionGUI.getFrame().setContentPane(new MainGUI());
-                    ConnectionGUI.getFrame().revalidate();
-                    ConnectionGUI.getFrame().repaint(); 
+                    JFrame frame = new JFrame();
+                    MainGUI mainGUI = new MainGUI();    //adding MainGUI jpanel to frame
+                    frame.add(mainGUI);
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+                    frame.pack();
+                    LogGui.setVisible(false);
+                    LogGui.dispose();
                 } else {
                     JFrame jfwrong = new JFrame();
                     JPanel jpwrong = new JPanel();
@@ -171,32 +177,37 @@ public class LoginGUI extends javax.swing.JFrame {
 
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ConnectionGUI.getFrame().setContentPane(new RegisterGUI());
-                ConnectionGUI.getFrame().revalidate();
-                ConnectionGUI.getFrame().repaint();
+                RegisterGUI reg = new RegisterGUI();
+                JFrame frame = new JFrame(); 
+                frame.add(reg);                 //adding registerGUI jpanel to frame
+                frame.setVisible(true);
+                frame.setLocationRelativeTo(null);
+                frame.pack();
+                LogGui.setVisible(false);
+                LogGui.dispose();
                 regButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        String username = RegisterGUI.textField1.getText().trim();
-                        String password = RegisterGUI.textField6.getText().trim();
-                        String confirmPassword = RegisterGUI.textField2.getText().trim();
-                        String email = RegisterGUI.textField3.getText().trim();
-                        String fName = RegisterGUI.textField4.getText().trim();
-                        String lName = RegisterGUI.textField5.getText().trim();
+                        String username = reg.textField1.getText().trim();
+                        String password = reg.textField6.getText().trim();
+                        String confirmPassword = reg.textField2.getText().trim();
+                        String email = reg.textField3.getText().trim();
+                        String fName = reg.textField4.getText().trim();
+                        String lName = reg.textField5.getText().trim();
 
                         String error = "No data entered";
 
                         if (username.equals("") || username.equals(error)) {
-                            RegisterGUI.textField1.setText(error);
+                            reg.textField1.setText(error);
                         } else if (password.equals("") || password.equals(error)) {
-                            RegisterGUI.textField6.setText(error);
+                            reg.textField6.setText(error);
                         } else if (confirmPassword.equals("") || confirmPassword.equals(error)) {
-                            RegisterGUI.textField2.setText(error);
+                            reg.textField2.setText(error);
                         } else if (email.equals("") || email.equals(error)) {
-                            RegisterGUI.textField3.setText(error);
+                            reg.textField3.setText(error);
                         } else if (fName.equals("") || fName.equals(error)) {
-                            RegisterGUI.textField4.setText(error);
+                            reg.textField4.setText(error);
                         } else if (lName.equals("") || lName.equals(error)) {
-                            RegisterGUI.textField5.setText(error);
+                            reg.textField5.setText(error);
                         } else {
                             System.out.println(password);
                             System.out.println(confirmPassword);
