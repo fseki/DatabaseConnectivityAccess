@@ -27,6 +27,27 @@ public class MoviesOnLoan {
         returned = newReturned;
     }
     
+    public int getUserId(){
+        return user_id;
+    }
+    
+    public boolean hasRentedMovie(MovieRentalsDatabase db, String movieName, int userID){
+        boolean rented = false;
+        ArrayList<String> values = new ArrayList<String>();
+        String query = "SELECT movie_id FROM movie WHERE movie_title = ?";
+        values.add(movieName);
+        ArrayList<ArrayList<String>> data = db.getDataWithSpecificNumCols(query, values, 1);
+        movie_id = Integer.parseInt(data.get(0).get(0));
+        query = "SELECT user_id from movies_on_loan WHERE movie_id = ?";
+        values.clear();
+        values.add("" + movie_id);
+        data = db.getDataWithSpecificNumCols(query, values, 1);
+        if (data != null && data.size() != 0){
+            rented = true;
+        }
+        return rented;
+    }
+    
      /*
      * Method which performs updates on the database in order to display a movie
      * as rented, and save information about the user which rented the movie

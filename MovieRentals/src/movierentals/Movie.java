@@ -13,7 +13,9 @@ public class Movie {
     private String genre;
     private String studio;
     private int genre_id;
-    private int studii_id;
+    private int studi0_id;
+    
+    private boolean rented = false;
 
     public Movie() {
 
@@ -28,6 +30,14 @@ public class Movie {
         title = newTitle;
         release_date = newDate;
         age_rating = rating;
+    }
+    
+    public void setRented(boolean rented){
+        this.rented = rented;
+    }
+    
+    public boolean isRented(){
+        return rented;
     }
 
     /*
@@ -167,6 +177,7 @@ public class Movie {
 
         if (data == null || data.size() == 0) {
             output += "Available for rent\n\n";
+            setRented(false);
         } else {
             String rented = data.get(0).get(0);
 
@@ -174,8 +185,10 @@ public class Movie {
             //and have a returned value of true
             if (rented.equalsIgnoreCase("1")) {
                 output += "Available for rent\n\n";
+                setRented(false);
             } else {
                 output += "Yes\n\n";
+                setRented(true);
             }
 
         }

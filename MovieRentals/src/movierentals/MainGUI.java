@@ -1,9 +1,16 @@
 package movierentals;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import static movierentals.MovieInfoGUI.jbRent;
+import static movierentals.MovieInfoGUI.jbReturn;
+import static movierentals.MovieInfoGUI.jtaInfo;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -64,10 +71,10 @@ public class MainGUI extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jtMovies = new javax.swing.JTable();
         jMenuBar5 = new javax.swing.JMenuBar();
-        jMenu9 = new javax.swing.JMenu();
+        jmFile = new javax.swing.JMenu();
         jmiExport = new javax.swing.JMenuItem();
         jmiExit = new javax.swing.JMenuItem();
-        jMenu10 = new javax.swing.JMenu();
+        jmEdit = new javax.swing.JMenu();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -213,7 +220,7 @@ public class MainGUI extends javax.swing.JPanel {
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
-        jMenu9.setText("File");
+        jmFile.setText("File");
 
         jmiExport.setText("Export");
         jmiExport.addActionListener(new java.awt.event.ActionListener() {
@@ -221,7 +228,7 @@ public class MainGUI extends javax.swing.JPanel {
                 jmiExportActionPerformed(evt);
             }
         });
-        jMenu9.add(jmiExport);
+        jmFile.add(jmiExport);
 
         jmiExit.setText("Exit");
         jmiExit.addActionListener(new java.awt.event.ActionListener() {
@@ -229,12 +236,12 @@ public class MainGUI extends javax.swing.JPanel {
                 jmiExitActionPerformed(evt);
             }
         });
-        jMenu9.add(jmiExit);
+        jmFile.add(jmiExit);
 
-        jMenuBar5.add(jMenu9);
+        jMenuBar5.add(jmFile);
 
-        jMenu10.setText("Edit");
-        jMenuBar5.add(jMenu10);
+        jmEdit.setText("Edit");
+        jMenuBar5.add(jmEdit);
 
         jInternalFrame1.setJMenuBar(jMenuBar5);
 
@@ -273,6 +280,7 @@ public class MainGUI extends javax.swing.JPanel {
     private void jbGoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGoActionPerformed
         String searchTerm = jtfSearch.getText().trim();
         Movie movie = new Movie();
+        MoviesOnLoan loanedMovies = new MoviesOnLoan();
         //ArrayList<ArrayList<String>> data;
         if (searchTerm.equals("")) {
             data = movie.fetchAll(database);
@@ -297,9 +305,48 @@ public class MainGUI extends javax.swing.JPanel {
         System.out.println("inside button action listener");
         jtMovies.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
             public void valueChanged(ListSelectionEvent event){
-                String movieName = data.get(jtMovies.getSelectedRow()).get(0);
-                String movieInfo = movie.getMovieInfo(database, movieName);
-                System.out.println(movieInfo);
+                if (event.getValueIsAdjusting() == false){
+                    String movieName = data.get(jtMovies.getSelectedRow()).get(0);
+                    String movieInfo = movie.getMovieInfo(database, movieName);
+                    MovieInfoGUI.main();
+                    JFrame frame = new JFrame();
+                    MovieInfoGUI gui = new MovieInfoGUI();
+                    gui.setVisible(true);
+                    gui.setLocationRelativeTo(null);
+                    jtaInfo.setText(movieInfo);
+                    
+                    if (movie.isRented()){
+                        jbRent.setEnabled(false);
+                    }
+                    
+                    boolean hasRented = loanedMovies.hasRentedMovie(database, movieName, ConnectionGUI.getUser().getUserID());
+                    System.out.println(hasRented);
+                    if (!hasRented){
+                        jbReturn.setEnabled(false);
+                    }
+
+                    jbRent.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent ae){
+                            ConnectionGUI.getUser().getUserID();
+                            int choice = JOptionPane.showConfirmDialog(null, "Would you like to rent " + movieName + " for a week?\n Answering NO will rent it for a day.");
+                            if (choice == JOptionPane.YES_OPTION){
+                                loanedMovies.rentMovie(database, movieName, true, ConnectionGUI.getUser().getUserID());
+                            }
+                            else if (choice == JOptionPane.NO_OPTION){
+                                loanedMovies.rentMovie(database, movieName, false, ConnectionGUI.getUser().getUserID());
+                            }
+                            jbReturn.setEnabled(true);
+                            jbRent.setEnabled(false);
+                        }
+                    });
+                    
+                    jbReturn.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent ae){
+                            loanedMovies.returnMovie(database, movieName, ConnectionGUI.getUser().getUserID());
+                            jbRent.setEnabled(true);
+                        }
+                    });
+                }
             }
         });
     }//GEN-LAST:event_jbGoActionPerformed
@@ -319,7 +366,6 @@ public class MainGUI extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;
@@ -331,7 +377,6 @@ public class MainGUI extends javax.swing.JPanel {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
-    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;
@@ -346,6 +391,8 @@ public class MainGUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbGo;
     private javax.swing.JLabel jlSearch;
+    private javax.swing.JMenu jmEdit;
+    private javax.swing.JMenu jmFile;
     private javax.swing.JMenuItem jmiExit;
     private javax.swing.JMenuItem jmiExport;
     private javax.swing.JPanel jpCenter;

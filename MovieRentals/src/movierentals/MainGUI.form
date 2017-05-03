@@ -325,7 +325,7 @@
         </Container>
         <Menu class="javax.swing.JMenuBar" name="jMenuBar5">
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="jMenu9">
+            <Menu class="javax.swing.JMenu" name="jmFile">
               <Properties>
                 <Property name="text" type="java.lang.String" value="File"/>
               </Properties>
@@ -348,7 +348,7 @@
                 </MenuItem>
               </SubComponents>
             </Menu>
-            <Menu class="javax.swing.JMenu" name="jMenu10">
+            <Menu class="javax.swing.JMenu" name="jmEdit">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Edit"/>
               </Properties>
