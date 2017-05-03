@@ -140,9 +140,9 @@ public class LoginGUI extends javax.swing.JFrame {
     private static java.awt.TextField userField;
     // End of variables declaration//GEN-END:variables
 
-    public static void main() {
+    public static void main(MovieRentalsDatabase db) {
         LoginGUI LogGui = new LoginGUI();
-
+        MovieRentalsDatabase database = db;
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -155,7 +155,7 @@ public class LoginGUI extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (ConnectionGUI.getUser().login(userField.getText(), passField.getText())) {
                     JFrame frame = new JFrame();
-                    MainGUI mainGUI = new MainGUI();    //adding MainGUI jpanel to frame
+                    MainGUI mainGUI = new MainGUI(database);    //adding MainGUI jpanel to frame
                     frame.add(mainGUI);
                     frame.setVisible(true);
                     frame.setLocationRelativeTo(null);

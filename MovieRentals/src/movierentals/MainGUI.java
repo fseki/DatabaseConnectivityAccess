@@ -1,11 +1,13 @@
 package movierentals;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author student
@@ -15,8 +17,9 @@ public class MainGUI extends javax.swing.JPanel {
     /**
      * Creates new form Login
      */
-    public MainGUI() {
+    public MainGUI(MovieRentalsDatabase db) {
         initComponents();
+        database = db;
     }
 
     /**
@@ -267,7 +270,29 @@ public class MainGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGoActionPerformed
+        String searchTerm = jtfSearch.getText().trim();
+        Movie movie = new Movie();
+        ArrayList<ArrayList<String>> data;
+        if (searchTerm.equals("")) {
+            data = movie.fetchAll(database);
+            DefaultTableModel model = (DefaultTableModel) jtMovies.getModel();
+            model.setRowCount(0);
 
+            for (int i = 0; i < data.size(); i++) {
+                Object[] row = {data.get(i).get(0), data.get(i).get(1), data.get(i).get(2), data.get(i).get(3)};
+                model.addRow(row);
+            }
+
+        } else {
+            data = movie.fetchFromSearch(database, searchTerm);
+            DefaultTableModel model = (DefaultTableModel) jtMovies.getModel();
+            model.setRowCount(0);
+
+            for (int i = 0; i < data.size(); i++) {
+                Object[] row = {data.get(i).get(0), data.get(i).get(1), data.get(i).get(2), data.get(i).get(3)};
+                model.addRow(row);
+            }
+        }
     }//GEN-LAST:event_jbGoActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -278,6 +303,7 @@ public class MainGUI extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private MovieRentalsDatabase database;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JInternalFrame jInternalFrame1;
