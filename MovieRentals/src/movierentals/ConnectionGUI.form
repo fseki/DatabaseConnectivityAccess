@@ -75,7 +75,7 @@
                           <Component id="conn_btn" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="73" max="32767" attributes="0"/>
+                  <EmptySpace pref="71" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -119,18 +119,18 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="wb_name">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Server name:"/>
+            <Property name="text" type="java.lang.String" value="MySQL username:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="wb_pass">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Server password:"/>
+            <Property name="text" type="java.lang.String" value="MySQL password:"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="server_name">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Connection name:"/>
+            <Property name="text" type="java.lang.String" value="Server location:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="server_port">

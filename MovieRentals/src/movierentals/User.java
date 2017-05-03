@@ -44,6 +44,10 @@ public class User {
         this.lName = lName;
         this.role = role;
     }
+    
+    public int getUserID(){
+        return user_id;
+    }
 
     public boolean login(String newUsername, String newPassword) {
         username = newUsername;

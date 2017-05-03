@@ -42,12 +42,12 @@ public class LoginGUI extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         userField = new java.awt.TextField();
-        passField = new java.awt.TextField();
         label1 = new java.awt.Label();
         label2 = new java.awt.Label();
         loginButton = new java.awt.Button();
         registerButton = new java.awt.Button();
         label3 = new java.awt.Label();
+        passField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,11 +70,11 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(133, 133, 133)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(userField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(userField, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                             .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(passField)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(155, 155, 155)
                         .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -82,7 +82,7 @@ public class LoginGUI extends javax.swing.JFrame {
                         .addGap(188, 188, 188)
                         .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(195, 195, 195)
+                        .addGap(194, 194, 194)
                         .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(148, Short.MAX_VALUE))
         );
@@ -95,11 +95,11 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addComponent(userField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(registerButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,7 +135,7 @@ public class LoginGUI extends javax.swing.JFrame {
     private java.awt.Label label2;
     private java.awt.Label label3;
     private static java.awt.Button loginButton;
-    private static java.awt.TextField passField;
+    private static javax.swing.JPasswordField passField;
     private static java.awt.Button registerButton;
     private static java.awt.TextField userField;
     // End of variables declaration//GEN-END:variables
@@ -156,10 +156,14 @@ public class LoginGUI extends javax.swing.JFrame {
                 if (ConnectionGUI.getUser().login(userField.getText(), passField.getText())) {
                     JFrame frame = new JFrame();
                     MainGUI mainGUI = new MainGUI(database);    //adding MainGUI jpanel to frame
+                    UtilitiesClass utils = new UtilitiesClass();
+                    
                     frame.add(mainGUI);
                     frame.setVisible(true);
                     frame.setLocationRelativeTo(null);
                     frame.pack();
+                    utils.notifyUser(database, ConnectionGUI.getUser().getUserID()); //method which notifies the user if he needs to return a 
+                                                                                     //movie soon
                     LogGui.setVisible(false);
                     LogGui.dispose();
                 } else {
@@ -183,31 +187,31 @@ public class LoginGUI extends javax.swing.JFrame {
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null);
                 frame.pack();
-                LogGui.setVisible(false);
-                LogGui.dispose();
+                //LogGui.setVisible(false);
+                //LogGui.dispose();
                 regButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        String username = reg.textField1.getText().trim();
-                        String password = reg.textField6.getText().trim();
-                        String confirmPassword = reg.textField2.getText().trim();
-                        String email = reg.textField3.getText().trim();
-                        String fName = reg.textField4.getText().trim();
-                        String lName = reg.textField5.getText().trim();
+                        String username = reg.jtfUsername.getText().trim();
+                        String password = reg.jtfPassword.getText().trim();
+                        String confirmPassword = reg.jtfPasswordRepeat.getText().trim();
+                        String email = reg.jtfEmail.getText().trim();
+                        String fName = reg.jtfFirstName.getText().trim();
+                        String lName = reg.jtfLastName.getText().trim();
 
                         String error = "No data entered";
 
                         if (username.equals("") || username.equals(error)) {
-                            reg.textField1.setText(error);
+                            reg.jtfUsername.setText(error);
                         } else if (password.equals("") || password.equals(error)) {
-                            reg.textField6.setText(error);
+                            reg.jtfPassword.setText(error);
                         } else if (confirmPassword.equals("") || confirmPassword.equals(error)) {
-                            reg.textField2.setText(error);
+                            reg.jtfPasswordRepeat.setText(error);
                         } else if (email.equals("") || email.equals(error)) {
-                            reg.textField3.setText(error);
+                            reg.jtfEmail.setText(error);
                         } else if (fName.equals("") || fName.equals(error)) {
-                            reg.textField4.setText(error);
+                            reg.jtfFirstName.setText(error);
                         } else if (lName.equals("") || lName.equals(error)) {
-                            reg.textField5.setText(error);
+                            reg.jtfLastName.setText(error);
                         } else {
                             System.out.println(password);
                             System.out.println(confirmPassword);

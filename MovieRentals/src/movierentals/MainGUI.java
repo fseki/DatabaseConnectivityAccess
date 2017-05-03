@@ -1,6 +1,8 @@
 package movierentals;
 
 import java.util.ArrayList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -15,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class MainGUI extends javax.swing.JPanel {
 
     /**
-     * Creates new form Login
+     * Creates the main GUI
      */
     public MainGUI(MovieRentalsDatabase db) {
         initComponents();
@@ -63,8 +65,8 @@ public class MainGUI extends javax.swing.JPanel {
         jtMovies = new javax.swing.JTable();
         jMenuBar5 = new javax.swing.JMenuBar();
         jMenu9 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jmiExport = new javax.swing.JMenuItem();
+        jmiExit = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
 
         jMenu1.setText("File");
@@ -112,7 +114,10 @@ public class MainGUI extends javax.swing.JPanel {
 
         jlSearch.setText("Search:");
 
+        jtfSearch.setToolTipText("Enter Movie Name Here");
+
         jbGo.setText("Go");
+        jbGo.setToolTipText("");
         jbGo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGoActionPerformed(evt);
@@ -130,7 +135,7 @@ public class MainGUI extends javax.swing.JPanel {
                 .addComponent(jtfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbGo)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpSearchLayout.setVerticalGroup(
             jpSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,10 +149,7 @@ public class MainGUI extends javax.swing.JPanel {
 
         jtMovies.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Name", "Date Released", "Genre", "Age Rating"
@@ -167,10 +169,9 @@ public class MainGUI extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,21 +215,21 @@ public class MainGUI extends javax.swing.JPanel {
 
         jMenu9.setText("File");
 
-        jMenuItem2.setText("Export");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jmiExport.setText("Export");
+        jmiExport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jmiExportActionPerformed(evt);
             }
         });
-        jMenu9.add(jMenuItem2);
+        jMenu9.add(jmiExport);
 
-        jMenuItem3.setText("Exit");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jmiExit.setText("Exit");
+        jmiExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jmiExitActionPerformed(evt);
             }
         });
-        jMenu9.add(jMenuItem3);
+        jMenu9.add(jmiExit);
 
         jMenuBar5.add(jMenu9);
 
@@ -272,7 +273,7 @@ public class MainGUI extends javax.swing.JPanel {
     private void jbGoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGoActionPerformed
         String searchTerm = jtfSearch.getText().trim();
         Movie movie = new Movie();
-        ArrayList<ArrayList<String>> data;
+        //ArrayList<ArrayList<String>> data;
         if (searchTerm.equals("")) {
             data = movie.fetchAll(database);
             DefaultTableModel model = (DefaultTableModel) jtMovies.getModel();
@@ -293,17 +294,27 @@ public class MainGUI extends javax.swing.JPanel {
                 model.addRow(row);
             }
         }
+        System.out.println("inside button action listener");
+        jtMovies.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            public void valueChanged(ListSelectionEvent event){
+                String movieName = data.get(jtMovies.getSelectedRow()).get(0);
+                String movieInfo = movie.getMovieInfo(database, movieName);
+                System.out.println(movieInfo);
+            }
+        });
     }//GEN-LAST:event_jbGoActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void jmiExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiExportActionPerformed
+        UtilitiesClass utils = new UtilitiesClass();
+        utils.exportMoviesToFile(data);
+    }//GEN-LAST:event_jmiExportActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    private void jmiExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jmiExitActionPerformed
 
     private MovieRentalsDatabase database;
+    private ArrayList<ArrayList<String>> data;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JInternalFrame jInternalFrame1;
@@ -329,14 +340,14 @@ public class MainGUI extends javax.swing.JPanel {
     private javax.swing.JMenuBar jMenuBar6;
     private javax.swing.JMenuBar jMenuBar7;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbGo;
     private javax.swing.JLabel jlSearch;
+    private javax.swing.JMenuItem jmiExit;
+    private javax.swing.JMenuItem jmiExport;
     private javax.swing.JPanel jpCenter;
     private javax.swing.JPanel jpSearch;
     private javax.swing.JTable jtMovies;

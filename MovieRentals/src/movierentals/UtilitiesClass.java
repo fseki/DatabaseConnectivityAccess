@@ -28,17 +28,18 @@ public class UtilitiesClass {
         data = dataToExport;
         try {
             PrintWriter pw = new PrintWriter(fileToExportMovies);
-
+            pw.printf("%-25s%-15s%-15s%-10s", "Movie Name", "Release Date", "Genre", "Age Rating");
+            pw.println("\n");
+            pw.flush();
+            
+            String line = "";
             for (int i = 0; i < data.size(); i++) {
-                for (int m = 0; m < data.get(i).size(); m++) {
-                    pw.print(data.get(i).get(m) + "\t");
-                    pw.flush();
-                }
+                pw.printf("%-25s%-15s%-15s%-10s", data.get(i).get(0), data.get(i).get(1), data.get(i).get(2), data.get(i).get(3));
                 pw.println();
                 pw.flush();
             }
             pw.close();
-            System.out.println("Successfully exported movie list.");
+            JOptionPane.showMessageDialog(null, "Movies exported successfully!");
         } catch (FileNotFoundException fnf) {
             System.out.println("The file to which you want to export has not been found.");
         }

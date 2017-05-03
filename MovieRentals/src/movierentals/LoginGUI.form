@@ -46,11 +46,11 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="label1" min="-2" max="-2" attributes="0"/>
-                              <Component id="userField" min="-2" pref="184" max="-2" attributes="0"/>
+                              <Component id="userField" pref="184" max="32767" attributes="0"/>
                               <Component id="label2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="passField" alignment="0" min="-2" pref="184" max="-2" attributes="0"/>
+                              <Component id="passField" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -62,7 +62,7 @@
                           <Component id="registerButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="194" max="-2" attributes="0"/>
                           <Component id="loginButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -79,11 +79,11 @@
                   <Component id="userField" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="label2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Component id="passField" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Component id="loginButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="53" max="32767" attributes="0"/>
+                  <EmptySpace pref="45" max="32767" attributes="0"/>
                   <Component id="label3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="registerButton" min="-2" max="-2" attributes="0"/>
@@ -97,11 +97,6 @@
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
           </AccessibilityProperties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
-          </AuxValues>
-        </Component>
-        <Component class="java.awt.TextField" name="passField">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
           </AuxValues>
@@ -137,6 +132,11 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Don&apos;t have an account?"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="passField">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

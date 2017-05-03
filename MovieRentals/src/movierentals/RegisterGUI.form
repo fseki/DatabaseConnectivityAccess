@@ -51,12 +51,12 @@
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="textField6" max="32767" attributes="0"/>
-                      <Component id="textField1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="textField2" alignment="0" max="32767" attributes="0"/>
-                      <Component id="textField3" alignment="0" max="32767" attributes="0"/>
-                      <Component id="textField4" alignment="0" max="32767" attributes="0"/>
-                      <Component id="textField5" alignment="1" pref="140" max="32767" attributes="0"/>
+                      <Component id="jtfUsername" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jtfEmail" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jtfFirstName" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jtfLastName" alignment="1" pref="140" max="32767" attributes="0"/>
+                      <Component id="jtfPassword" max="32767" attributes="0"/>
+                      <Component id="jtfPasswordRepeat" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
               </Group>
@@ -81,20 +81,20 @@
                   <Component id="label1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="textField1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfUsername" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="username" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="textField6" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="confPassword" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="textField2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="password" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="confPassword" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfPassword" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="password" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfPasswordRepeat" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="email" min="-2" max="-2" attributes="0"/>
@@ -102,14 +102,14 @@
                           <Component id="fname" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="textField3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtfEmail" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                          <Component id="textField4" min="-2" max="-2" attributes="0"/>
+                          <Component id="jtfFirstName" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="textField5" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfLastName" min="-2" max="-2" attributes="0"/>
                       <Component id="lname" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
@@ -120,30 +120,25 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="java.awt.TextField" name="textField1">
+        <Component class="java.awt.TextField" name="jtfUsername">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textField1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfUsernameActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
-        <Component class="java.awt.TextField" name="textField2">
+        <Component class="java.awt.TextField" name="jtfEmail">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
-        <Component class="java.awt.TextField" name="textField3">
+        <Component class="java.awt.TextField" name="jtfFirstName">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
-        <Component class="java.awt.TextField" name="textField4">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-          </AuxValues>
-        </Component>
-        <Component class="java.awt.TextField" name="textField5">
+        <Component class="java.awt.TextField" name="jtfLastName">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
@@ -183,11 +178,6 @@
             <Property name="text" type="java.lang.String" value="Last name:"/>
           </Properties>
         </Component>
-        <Component class="java.awt.TextField" name="textField6">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-          </AuxValues>
-        </Component>
         <Component class="java.awt.Label" name="confPassword">
           <Properties>
             <Property name="text" type="java.lang.String" value="Password:"/>
@@ -202,6 +192,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Register"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="jtfPassword">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="jtfPasswordRepeat">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
