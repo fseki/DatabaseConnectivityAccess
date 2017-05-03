@@ -38,9 +38,10 @@ public class MoviesOnLoan {
         values.add(movieName);
         ArrayList<ArrayList<String>> data = db.getDataWithSpecificNumCols(query, values, 1);
         movie_id = Integer.parseInt(data.get(0).get(0));
-        query = "SELECT user_id from movies_on_loan WHERE movie_id = ?";
+        query = "SELECT returned from movies_on_loan WHERE movie_id = ? && user_id = ?";
         values.clear();
         values.add("" + movie_id);
+        values.add("" + userID);
         data = db.getDataWithSpecificNumCols(query, values, 1);
         if (data != null && data.size() != 0){
             rented = true;
