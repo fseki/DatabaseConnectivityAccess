@@ -54,12 +54,12 @@ public class ConnectionGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        wb_name.setText("Workbench name:");
+        wb_name.setText("Server name:");
 
-        wb_pass.setText("Workbench password:");
+        wb_pass.setText("Server password:");
         wb_pass.setToolTipText("");
 
-        server_name.setText("Server name:");
+        server_name.setText("Connection name:");
 
         server_port.setText("Port number:");
 
@@ -98,7 +98,7 @@ public class ConnectionGUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(150, 150, 150)
                         .addComponent(conn_btn)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
