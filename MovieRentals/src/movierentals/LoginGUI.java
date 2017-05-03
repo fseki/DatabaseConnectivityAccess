@@ -12,10 +12,6 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import static movierentals.ConnectionGUI.db_name_txt;
-import static movierentals.ConnectionGUI.port_num_txt;
-import static movierentals.ConnectionGUI.serv_name_txt;
-import static movierentals.ConnectionGUI.wb_pass_txt;
 import static movierentals.RegisterGUI.regButton;
 
 /**
