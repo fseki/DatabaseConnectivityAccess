@@ -217,7 +217,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 });
             }
         });
-
+        
         Movie movie = new Movie();
         //System.out.println(movie.getMovieInfo(myDatabase, "Sinister"));
 
