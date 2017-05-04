@@ -5,6 +5,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -29,7 +31,8 @@ public class UtilitiesClass {
         try {
             PrintWriter pw = new PrintWriter(fileToExportMovies);
             pw.printf("%-25s%-15s%-15s%-10s", "Movie Name", "Release Date", "Genre", "Age Rating");
-            pw.println("\n");
+            pw.println("");
+            pw.println();
             pw.flush();
 
             String line = "";
@@ -67,60 +70,54 @@ public class UtilitiesClass {
      * @param userId, Id of the user that has logged in
      */
     public void notifyUser(MovieRentalsDatabase db, int userId) {
-        long currentTime = System.currentTimeMillis();
-        ArrayList<ArrayList<String>> data;
-        ArrayList<ArrayList<String>> tmp;
-        ArrayList<String> values = new ArrayList<String>();
-        values.add("" + userId);
+        try {
+            long currentTime = System.currentTimeMillis();
+            ArrayList<ArrayList<String>> data;
+            ArrayList<ArrayList<String>> tmp;
+            ArrayList<String> values = new ArrayList<String>();
+            ArrayList<String> moviesDueForReturn = new ArrayList<String>();
 
-        String query = "SELECT date_due, movie_id FROM movies_on_loan WHERE user_id = ?";
+            values.add("" + userId);
 
-        data = db.getDataWithSpecificNumCols(query, values, 2);
-       
-        Date date = null;
-        int matches = 0;
-        String tmpName = "";
-     
-        if (data != null) {
-            int numMoviesRented = data.size();
-            String message = "REMINDER: You have rented movies which \nhave to be returned tomorrow.\n"
-                    + "Movies: ";
-            for (int i = 0; i < numMoviesRented; i++) {
-                String date_due = data.get(i).get(0);
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String query = "SELECT date_due, movie_id FROM movies_on_loan WHERE user_id = ?";
 
-                date = new Date(currentTime + 86400000);
-                String date2 = df.format(date);
+            data = db.getDataWithSpecificNumCols(query, values, 2);
 
-                if (date_due.equals(date2)) {
-                    matches++;
-                    values.clear();
-                    values.add(data.get(i).get(1));
-                    String query2 = "SELECT movie_title FROM movie WHERE movie_id = ?";
-                    tmp = db.getDataWithSpecificNumCols(query2, values, 1);
-                    String movieName = tmp.get(0).get(0);
-                    tmpName = movieName;
-                    if (numMoviesRented == 1){
-                        JOptionPane.showMessageDialog(null, "REMINDER: The movie you have rented, " + movieName + ", has to be returned tomorrow.");
-                    }
-                    else{
-                        message += movieName + "\n";
-                        if (i+1 == numMoviesRented){
-                            JOptionPane.showMessageDialog(null, message);
-                        }
+            Date date = null;
+            int matches = 0;
+
+            if (data != null) {
+                int numMoviesRented = data.size();
+                for (int i = 0; i < numMoviesRented; i++) {
+                    String date_due = data.get(i).get(0);
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+                    date = new Date(currentTime + 86400000);
+                    String date2 = df.format(date);
+
+                    if (date_due.equals(date2)) {
+                        matches++;
+                        values.clear();
+                        values.add(data.get(i).get(1));
+                        String query2 = "SELECT movie_title FROM movie WHERE movie_id = ?";
+                        tmp = db.getDataWithSpecificNumCols(query2, values, 1);
+                        String movieName = tmp.get(0).get(0);
+                        moviesDueForReturn.add(movieName);
                     }
                 }
-            }
-            //when there are multiple movies rented, but some of them don't have to be returned tomorrow,
-            //notification won't show
-            //this handles that case
-            if (numMoviesRented > 1 && matches < numMoviesRented){
                 String movies = "";
-                JOptionPane.showMessageDialog(null, "REMINDER: The movie you have rented, " + tmpName + ", has to be returned tomorrow.");    
-            }
+                if (matches > 0) {
+                    for (int i = 0; i < moviesDueForReturn.size(); i++) {
+                        movies += moviesDueForReturn.get(i) + "\n";
+                    }
+                    JOptionPane.showMessageDialog(null, "REMINDER: \nThe following movie(s) has/have to be returned tomorrow:\n" + movies);
+                }
 
-        } else {
-            System.out.println("No movies rented. No need to notify");
+            } else {
+                System.out.println("No movies rented. No need to notify");
+            }
+        } catch (InfoException ex) {
+            System.out.println(ex.getInfo());
         }
     }
 }

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -278,10 +279,14 @@ public class MainGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGoActionPerformed
+        
+        if (data != null) {
+            data.clear();
+        }
         String searchTerm = jtfSearch.getText().trim();
         Movie movie = new Movie();
         MoviesOnLoan loanedMovies = new MoviesOnLoan();
-        //ArrayList<ArrayList<String>> data;
+        
         if (searchTerm.equals("")) {
             data = movie.fetchAll(database);
             DefaultTableModel model = (DefaultTableModel) jtMovies.getModel();
@@ -302,50 +307,53 @@ public class MainGUI extends javax.swing.JPanel {
                 model.addRow(row);
             }
         }
-        System.out.println("inside button action listener");
-        jtMovies.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-            public void valueChanged(ListSelectionEvent event){
-                if (event.getValueIsAdjusting() == false){
-                    String movieName = data.get(jtMovies.getSelectedRow()).get(0);
-                    String movieInfo = movie.getMovieInfo(database, movieName);
-                    MovieInfoGUI.main();
-                    JFrame frame = new JFrame();
-                    MovieInfoGUI gui = new MovieInfoGUI();
-                    gui.setVisible(true);
-                    gui.setLocationRelativeTo(null);
-                    jtaInfo.setText(movieInfo);
-                    
-                    if (movie.isRented()){
-                        jbRent.setEnabled(false);
-                    }
-                    
-                    boolean hasRented = loanedMovies.hasRentedMovie(database, movieName, ConnectionGUI.getUser().getUserID());
-                    System.out.println(hasRented);
-                    if (!hasRented){
-                        jbReturn.setEnabled(false);
-                    }
 
-                    jbRent.addActionListener(new ActionListener(){
-                        public void actionPerformed(ActionEvent ae){
-                            ConnectionGUI.getUser().getUserID();
-                            int choice = JOptionPane.showConfirmDialog(null, "Would you like to rent " + movieName + " for a week?\n Answering NO will rent it for a day.");
-                            if (choice == JOptionPane.YES_OPTION){
-                                loanedMovies.rentMovie(database, movieName, true, ConnectionGUI.getUser().getUserID());
-                            }
-                            else if (choice == JOptionPane.NO_OPTION){
-                                loanedMovies.rentMovie(database, movieName, false, ConnectionGUI.getUser().getUserID());
-                            }
-                            jbReturn.setEnabled(true);
+        jtMovies.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent event) {
+                if (event.getValueIsAdjusting() == false) {
+                    int row = jtMovies.getSelectedRow();
+                    if (row != -1) {
+                        String movieName = data.get(jtMovies.getSelectedRow()).get(0);
+                        String movieInfo = movie.getMovieInfo(database, movieName);
+                        MovieInfoGUI.main();
+                        JFrame frame = new JFrame();
+                        MovieInfoGUI gui = new MovieInfoGUI();
+                        gui.setVisible(true);
+                        gui.setLocationRelativeTo(null);
+                        jtaInfo.setText(movieInfo);
+
+                        if (movie.isRented()) {
                             jbRent.setEnabled(false);
                         }
-                    });
-                    
-                    jbReturn.addActionListener(new ActionListener(){
-                        public void actionPerformed(ActionEvent ae){
-                            loanedMovies.returnMovie(database, movieName, ConnectionGUI.getUser().getUserID());
-                            jbRent.setEnabled(true);
+
+                        boolean hasRented = loanedMovies.hasRentedMovie(database, movieName, ConnectionGUI.getUser().getUserID());
+                        System.out.println(hasRented);
+                        if (!hasRented) {
+                            jbReturn.setEnabled(false);
                         }
-                    });
+
+                        jbRent.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent ae) {
+                                ConnectionGUI.getUser().getUserID();
+                                int choice = JOptionPane.showConfirmDialog(null, "Would you like to rent " + movieName + " for a week?\n Answering NO will rent it for a day.");
+                                if (choice == JOptionPane.YES_OPTION) {
+                                    loanedMovies.rentMovie(database, movieName, true, ConnectionGUI.getUser().getUserID());
+                                } else if (choice == JOptionPane.NO_OPTION) {
+                                    loanedMovies.rentMovie(database, movieName, false, ConnectionGUI.getUser().getUserID());
+                                }
+                                jbReturn.setEnabled(true);
+                                jbRent.setEnabled(false);
+                            }
+                        });
+
+                        jbReturn.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent ae) {
+                                loanedMovies.returnMovie(database, movieName, ConnectionGUI.getUser().getUserID());
+                                jbRent.setEnabled(true);
+                            }
+                        });
+                        jtMovies.clearSelection();
+                    }
                 }
             }
         });

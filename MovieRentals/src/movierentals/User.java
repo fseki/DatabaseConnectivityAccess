@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -44,88 +46,93 @@ public class User {
         this.lName = lName;
         this.role = role;
     }
-    
-    public int getUserID(){
+
+    public int getUserID() {
         return user_id;
     }
 
     public boolean login(String newUsername, String newPassword) {
-        username = newUsername;
-        String hashedPassword = hashPassword(newPassword, SALT);
         boolean valid = false;
-        ArrayList<ArrayList<String>> data;
-        ArrayList<String> values = new ArrayList<String>();
-        values.add(username);
+        try {
+            username = newUsername;
+            String hashedPassword = hashPassword(newPassword, SALT);
 
-        data = database.getData("SELECT * FROM user WHERE username = ?", values);
-        if (data == null || data.size() == 0) {
-            valid = false;
-            System.out.println("Invalid username or password");
-        } else {
-            password = data.get(1).get(2);
+            ArrayList<ArrayList<String>> data;
+            ArrayList<String> values = new ArrayList<String>();
+            values.add(username);
 
-            if (password.equals(hashedPassword)) {
-                valid = true;
-                user_id = Integer.parseInt(data.get(1).get(0));
-                email = data.get(1).get(3);
-                fName = data.get(1).get(4);
-                lName = data.get(1).get(5);
-                role = data.get(1).get(6);
-                System.out.println(fName + " " + lName + ", your role is " + role);
+            data = database.getData("SELECT * FROM user WHERE username = ?", values);
+            if (data == null || data.size() == 0) {
+                valid = false;
+                System.out.println("Invalid username or password");
             } else {
-                System.out.println("Username or password not valid....");
+                password = data.get(1).get(2);
+
+                if (password.equals(hashedPassword)) {
+                    valid = true;
+                    user_id = Integer.parseInt(data.get(1).get(0));
+                    email = data.get(1).get(3);
+                    fName = data.get(1).get(4);
+                    lName = data.get(1).get(5);
+                    role = data.get(1).get(6);
+                    System.out.println(fName + " " + lName + ", your role is " + role);
+                } else {
+                    System.out.println("Username or password not valid....");
+                }
             }
+
+        } catch (InfoException ex) {
+            System.out.println(ex.getInfo());
         }
 
         return valid;
     }
 
     public boolean register(String newUsername, String newPassword, String newConfPassword, String newEmail, String newFname, String newLname) {
-        username = newUsername;
-
-        email = newEmail;
-        fName = newFname;
-        lName = newLname;
-        role = "Public";
-
         boolean success = false;
+        try {
+            username = newUsername;
+            email = newEmail;
+            fName = newFname;
+            lName = newLname;
+            role = "Public";
 
-        if (!newConfPassword.equals("")) {
-            
-            if (!(newPassword.equals(newConfPassword))) {
-                JFrame jfwrong = new JFrame();
-                JPanel jpwrong = new JPanel();
-                JLabel jlwrong = new JLabel("Passwords do not match");
-                jpwrong.add(jlwrong);
-                jfwrong.add(jpwrong);
-                jfwrong.setVisible(true);
-                jfwrong.setLocationRelativeTo(null);
-                jfwrong.pack();
-                return false;
-            } else {
-                password = hashPassword(newPassword, SALT);
-                confPassword = hashPassword(newConfPassword, SALT);
+            if (!newConfPassword.equals("")) {
+                if (!(newPassword.equals(newConfPassword))) {
+                    JFrame jfwrong = new JFrame();
+                    JPanel jpwrong = new JPanel();
+                    JLabel jlwrong = new JLabel("Passwords do not match");
+                    jpwrong.add(jlwrong);
+                    jfwrong.add(jpwrong);
+                    jfwrong.setVisible(true);
+                    jfwrong.setLocationRelativeTo(null);
+                    jfwrong.pack();
+                } else {
+                    password = hashPassword(newPassword, SALT);
+                    confPassword = hashPassword(newConfPassword, SALT);
+                }
             }
-            
+            ArrayList<String> values = new ArrayList<String>();
+            values.add(username);
+            values.add(password);
+            values.add(email);
+            values.add(fName);
+            values.add(lName);
+            values.add(role);
+
+            success = database.setData("INSERT INTO user(username, password, email, fname, lname, role) VALUES(?, ?, ?, ?, ?, ?)", values);
+
+            if (success) {
+                System.out.println("Successfully registered");
+                success = true;
+            } else {
+                System.out.println("Failed to register");
+                success = false;
+            }
+        } catch (InfoException ex) {
+            System.out.println(ex.getInfo());
         }
-        ArrayList<String> values = new ArrayList<String>();
-        values.add(username);
-        values.add(password);
-        values.add(email);
-        values.add(fName);
-        values.add(lName);
-        values.add(role);
-
-        success = database.setData("INSERT INTO user(username, password, email, fname, lname, role) VALUES(?, ?, ?, ?, ?, ?)", values);
-
-        if (success) {
-            System.out.println("Successfully registered");
-            return true;
-        } else {
-            System.out.println("Failed to register");
-            return false;
-        }
-
+        return success;
     }
 
     public String hashPassword(String passwordToHash, String salt) {
@@ -147,6 +154,5 @@ public class User {
         return hashedPassword;
 
     }
-    
-    
+
 }

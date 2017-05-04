@@ -207,7 +207,8 @@ public class ConnectionGUI extends javax.swing.JFrame {
         conn_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 MovieRentalsDatabase myDatabase = new MovieRentalsDatabase(ConnectionGUI.wb_name_txt.getText(), wb_pass_txt.getText(), serv_name_txt.getText(), port_num_txt.getText(), db_name_txt.getText());
-                if (myDatabase.connect()) {
+                try{
+                    if (myDatabase.connect()) {
                     user = new User(myDatabase);
                     LoginGUI.main(myDatabase);
                     connGUI.setVisible(false);
@@ -222,7 +223,10 @@ public class ConnectionGUI extends javax.swing.JFrame {
                     jfwrong.setLocationRelativeTo(null);
                     jfwrong.pack();
                 }
-                
+                }
+                catch (InfoException ie){
+                    System.out.println(ie.getMessage());
+                } 
             }
         });
         

@@ -5,7 +5,6 @@
  */
 package movierentals;
 
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import java.sql.*;
 import java.util.*;
 import javax.swing.JOptionPane;
@@ -75,7 +74,7 @@ public class MovieRentalsDatabase {
 	 * Method to connect to a database
 	 * @return true or false, depending on connection success
      */
-    public boolean connect() {
+    public boolean connect() throws InfoException{
         try {
             String driver = "com.mysql.jdbc.Driver";
             String mysqlURI = "jdbc:mysql://" + dbServer + ":" + port + "/" + dbName + "?useSSL=false";
@@ -90,7 +89,7 @@ public class MovieRentalsDatabase {
             statement = connection.createStatement();
             return true;
         } catch (SQLException se) {
-            return false;
+            throw new InfoException(se, se.getSQLState(), se.getErrorCode(), se.getMessage());
         } catch (ClassNotFoundException cnf) {
             System.out.println("\nSomething went wrong. A connection to the database was not established.");
             return false;
@@ -104,7 +103,7 @@ public class MovieRentalsDatabase {
 	 * Method to close the database connection
 	 * @return true or false, depending on closing success
      */
-    public boolean close() {
+    public boolean close() throws InfoException{
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
@@ -117,8 +116,7 @@ public class MovieRentalsDatabase {
             }
 
         } catch (SQLException se) {
-            System.out.println("Something went wrong. The connection could not be closes.");
-            return false;
+            throw new InfoException(se, se.getSQLState(), se.getErrorCode(), se.getMessage());
 
         } catch (Exception e) {
             System.out.println("Something went wrong. The connection could not be closed.");
@@ -132,7 +130,7 @@ public class MovieRentalsDatabase {
 	 * @param query, Query to be executed
 	 * @return results, The array populated with query results
      */
-    public ArrayList<ArrayList<String>> getData(String query) {
+    public ArrayList<ArrayList<String>> getData(String query) throws InfoException{
         ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
 
         int numCols = 4;
@@ -155,7 +153,7 @@ public class MovieRentalsDatabase {
                 }
             }
         } catch (SQLException se) {
-            System.out.println("Something went wrong: Could not get data from the database.");
+            throw new InfoException(se, se.getSQLState(), se.getErrorCode(), se.getMessage());
         } catch (IndexOutOfBoundsException ibe) {
             System.out.println("An error occured whilst storing the query results.");
 
@@ -173,7 +171,7 @@ public class MovieRentalsDatabase {
 	 * @param incColName, boolean for including the column names
 	 * @return results, The array populated with query results
      */
-    public ArrayList<ArrayList<String>> getData(String query, boolean incColName) {
+    public ArrayList<ArrayList<String>> getData(String query, boolean incColName) throws InfoException{
         ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
 
         try {
@@ -202,7 +200,7 @@ public class MovieRentalsDatabase {
                 results = getData(query);
             }
         } catch (SQLException se) {
-            System.out.println("Something went wrong: Could not get data.");
+            throw new InfoException(se, se.getSQLState(), se.getErrorCode(), se.getMessage());
         } catch (Exception e) {
             System.out.println("Something went wrong: Could not get data.");
         }
@@ -214,7 +212,7 @@ public class MovieRentalsDatabase {
 	 * Method which updates the database with the given query string
 	 * @return true or false, depending on the success of the query
      */
-    public boolean setData(String query) {
+    public boolean setData(String query) throws InfoException{
         try {
             int rowsAffected = statement.executeUpdate(query);
 
@@ -226,8 +224,7 @@ public class MovieRentalsDatabase {
                 return true;
             }
         } catch (SQLException se) {
-            System.out.println("Something went wrong. Could not update the database.");
-            return false;
+            throw new InfoException(se, se.getSQLState(), se.getErrorCode(), se.getMessage());
 
         } catch (Exception e) {
             System.out.println("An error occurred while the database was being updated.");
@@ -241,7 +238,7 @@ public class MovieRentalsDatabase {
 	 * @param values, ArrayList with values to be used in the query
 	 * @return pStatement, The PreparedStatement object
      */
-    public PreparedStatement prepare(String statement, ArrayList<String> values) {
+    public PreparedStatement prepare(String statement, ArrayList<String> values) throws InfoException{
         try {
             pStatement = connection.prepareStatement(statement);
             for (int i = 0; i < values.size(); i++) {
@@ -256,11 +253,9 @@ public class MovieRentalsDatabase {
             }
 
         } catch (SQLException se) {
-            //System.out.println("An error occurred...");
-            se.printStackTrace();
+            throw new InfoException(se, se.getSQLState(), se.getErrorCode(), se.getMessage());
         } catch (Exception e) {
-            //System.out.println("An error occurred...");
-            e.printStackTrace();
+            System.out.println("An error occurred...");
         }
         return pStatement;
     }
@@ -274,7 +269,7 @@ public class MovieRentalsDatabase {
      * @param values, Values to be bound to the statement
      * @param numCols, Number of columns involved in the statement
     */
-    public ArrayList<ArrayList<String>> getDataWithSpecificNumCols(String statement, ArrayList<String> values, int numCols){
+    public ArrayList<ArrayList<String>> getDataWithSpecificNumCols(String statement, ArrayList<String> values, int numCols) throws InfoException{
         ArrayList<ArrayList<String>> data = null;
         int m = 0;
 
@@ -300,11 +295,9 @@ public class MovieRentalsDatabase {
             }
             prepStatement.close();
         } catch (SQLException se) {
-            //System.out.println("Something went wrong: Could not get the data.");
-            se.printStackTrace();
+            throw new InfoException(se, se.getSQLState(), se.getErrorCode(), se.getMessage());
         } catch (Exception e) {
-            //System.out.println("Something went wrong: Could not get the data.");
-            e.printStackTrace();
+            System.out.println("Something went wrong: Could not get the data.");
         }
         return data;
     }
@@ -316,7 +309,7 @@ public class MovieRentalsDatabase {
 	 * @param values, ArrayList of values that fill the query
 	 * @return data, 2D ArrayList filled with query results
      */
-    public ArrayList<ArrayList<String>> getData(String statement, ArrayList<String> values) {
+    public ArrayList<ArrayList<String>> getData(String statement, ArrayList<String> values) throws InfoException{
         ArrayList<ArrayList<String>> data = null;
         int numCols = 0;
         int m = 1;
@@ -358,11 +351,9 @@ public class MovieRentalsDatabase {
             result.close();
             prepStatement.close();
         } catch (SQLException se) {
-            //System.out.println("Something went wrong: Could not get the data.");
-            se.printStackTrace();
+            throw new InfoException(se, se.getSQLState(), se.getErrorCode(), se.getMessage());
         } catch (Exception e) {
-            //System.out.println("Something went wrong: Could not get the data.");
-            e.printStackTrace();
+            System.out.println("Something went wrong: Could not get the data.");
         }
         return data;
     }
@@ -374,7 +365,7 @@ public class MovieRentalsDatabase {
 	 * @param values, The ArrayList with query values
 	 * @return true or false, depending on the success of the query
      */
-    public boolean setData(String statement, ArrayList<String> values) {
+    public boolean setData(String statement, ArrayList<String> values) throws InfoException{
         boolean successful = false;
         try {
             PreparedStatement prepStatement = prepare(statement, values);
@@ -394,7 +385,7 @@ public class MovieRentalsDatabase {
                 JOptionPane.showMessageDialog(null, "Username already in use.\nPlease select another username.");
             }
             catch (ClassCastException cce){
-                se.printStackTrace();
+                throw new InfoException(cce);
             }
         } 
         
@@ -409,12 +400,12 @@ public class MovieRentalsDatabase {
 	 * Method which configures the database to not use auto-commits
 	 * Equivalent of starting a transaction
      */
-    public void startTrans() {
+    public void startTrans() throws InfoException{
         try {
             connection.setAutoCommit(false);
             System.out.println("Transaction started...");
         } catch (SQLException se) {
-            System.out.println("Could not start the transaction");
+            throw new InfoException(se, se.getSQLState(), se.getErrorCode(), se.getMessage());
         } catch (Exception e) {
             System.out.println("Could not start the transaction");
         }
@@ -424,7 +415,7 @@ public class MovieRentalsDatabase {
 	 * Method which commits all changes made and ends the transaction
 	 * by enabling auto-commits again
      */
-    public void endTrans() {
+    public void endTrans(){
         try {
             connection.commit();
             connection.setAutoCommit(true);
