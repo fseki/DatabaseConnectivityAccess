@@ -154,13 +154,13 @@ public class LoginGUI extends javax.swing.JFrame {
                     JFrame frame = new JFrame();
                     MainGUI mainGUI = new MainGUI(database);    //adding MainGUI jpanel to frame
                     UtilitiesClass utils = new UtilitiesClass();
-                    
+
                     frame.add(mainGUI);
                     frame.setVisible(true);
                     frame.setLocationRelativeTo(null);
                     frame.pack();
                     utils.notifyUser(database, ConnectionGUI.getUser().getUserID()); //method which notifies the user if he needs to return a 
-                                                                                     //movie soon
+                    //movie soon
                     LogGui.setVisible(false);
                     LogGui.dispose();
                 } else {
@@ -179,7 +179,7 @@ public class LoginGUI extends javax.swing.JFrame {
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 RegisterGUI reg = new RegisterGUI();
-                JFrame frame = new JFrame(); 
+                JFrame frame = new JFrame();
                 frame.add(reg);                 //adding registerGUI jpanel to frame
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null);
@@ -218,9 +218,6 @@ public class LoginGUI extends javax.swing.JFrame {
                 });
             }
         });
-        
-        Movie movie = new Movie();
-        //System.out.println(movie.getMovieInfo(myDatabase, "Sinister"));
 
     }
 

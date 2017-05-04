@@ -352,6 +352,24 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Edit"/>
               </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="addMovToDb">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Add movie to database"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMovToDbActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="rmMovFromDb">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Remove movie from databse"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rmMovFromDbActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
             </Menu>
           </SubComponents>
         </Menu>

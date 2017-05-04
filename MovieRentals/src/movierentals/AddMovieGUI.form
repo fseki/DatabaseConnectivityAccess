@@ -67,21 +67,21 @@
                               <Component id="addGenre" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="addStudio" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="addRating_txt1" max="32767" attributes="0"/>
-                              <Component id="addYear_txt1" max="32767" attributes="0"/>
+                              <Component id="addStudio_txt" max="32767" attributes="0"/>
+                              <Component id="addGenre_txt" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="addYear" min="-2" max="-2" attributes="0"/>
+                              <Component id="addDate" min="-2" max="-2" attributes="0"/>
                               <Component id="addTitle" min="-2" max="-2" attributes="0"/>
                               <Component id="addRating" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="addYear_txt" alignment="0" max="32767" attributes="0"/>
+                              <Component id="addDate_txt" alignment="0" max="32767" attributes="0"/>
                               <Component id="addTitle_txt" max="32767" attributes="0"/>
                               <Component id="addRating_txt" max="32767" attributes="0"/>
                           </Group>
@@ -103,8 +103,8 @@
                   </Group>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="addYear_txt" min="-2" max="-2" attributes="0"/>
-                      <Component id="addYear" min="-2" max="-2" attributes="0"/>
+                      <Component id="addDate_txt" min="-2" max="-2" attributes="0"/>
+                      <Component id="addDate" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -113,13 +113,13 @@
                   </Group>
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="addYear_txt1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="addGenre_txt" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="addGenre" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="addStudio" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="addRating_txt1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="addStudio_txt" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="30" max="32767" attributes="0"/>
                   <Component id="addMovieBtn" min="-2" max="-2" attributes="0"/>
@@ -134,9 +134,9 @@
             <Property name="text" type="java.lang.String" value="Add movie title"/>
           </Properties>
         </Component>
-        <Component class="java.awt.Label" name="addYear">
+        <Component class="java.awt.Label" name="addDate">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add movie year"/>
+            <Property name="text" type="java.lang.String" value="Add movie date"/>
           </Properties>
         </Component>
         <Component class="java.awt.Label" name="addRating">
@@ -145,10 +145,19 @@
           </Properties>
         </Component>
         <Component class="java.awt.TextField" name="addTitle_txt">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
-        <Component class="java.awt.TextField" name="addYear_txt">
+        <Component class="java.awt.TextField" name="addDate_txt">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
         <Component class="java.awt.TextField" name="addRating_txt">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
         <Component class="java.awt.Label" name="label1">
           <Properties>
@@ -157,24 +166,34 @@
         </Component>
         <Component class="java.awt.Button" name="addMovieBtn">
           <Properties>
+            <Property name="actionCommand" type="java.lang.String" value=""/>
             <Property name="label" type="java.lang.String" value="Add movie"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
         <Component class="java.awt.Label" name="addGenre">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add movie year"/>
+            <Property name="text" type="java.lang.String" value="Add movie genre"/>
           </Properties>
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Add movie genre"/>
           </AccessibilityProperties>
         </Component>
-        <Component class="java.awt.TextField" name="addYear_txt1">
+        <Component class="java.awt.TextField" name="addGenre_txt">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
-        <Component class="java.awt.TextField" name="addRating_txt1">
+        <Component class="java.awt.TextField" name="addStudio_txt">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
         <Component class="java.awt.Label" name="addStudio">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add movie rating"/>
+            <Property name="text" type="java.lang.String" value="Add movie studio"/>
           </Properties>
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Add movie studio"/>

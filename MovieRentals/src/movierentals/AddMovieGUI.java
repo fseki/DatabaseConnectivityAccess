@@ -1,21 +1,26 @@
 package movierentals;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Marko
  */
-public class AddMovie extends javax.swing.JFrame {
+public class AddMovieGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form AddMovie
      */
-    public AddMovie() {
+    public AddMovieGUI() {
         initComponents();
     }
 
@@ -30,33 +35,34 @@ public class AddMovie extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         addTitle = new java.awt.Label();
-        addYear = new java.awt.Label();
+        addDate = new java.awt.Label();
         addRating = new java.awt.Label();
         addTitle_txt = new java.awt.TextField();
-        addYear_txt = new java.awt.TextField();
+        addDate_txt = new java.awt.TextField();
         addRating_txt = new java.awt.TextField();
         label1 = new java.awt.Label();
         addMovieBtn = new java.awt.Button();
         addGenre = new java.awt.Label();
-        addYear_txt1 = new java.awt.TextField();
-        addRating_txt1 = new java.awt.TextField();
+        addGenre_txt = new java.awt.TextField();
+        addStudio_txt = new java.awt.TextField();
         addStudio = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         addTitle.setText("Add movie title");
 
-        addYear.setText("Add movie year");
+        addDate.setText("Add movie date");
 
         addRating.setText("Add movie rating");
 
         label1.setText("Adding movie to database");
 
+        addMovieBtn.setActionCommand("");
         addMovieBtn.setLabel("Add movie");
 
-        addGenre.setText("Add movie year");
+        addGenre.setText("Add movie genre");
 
-        addStudio.setText("Add movie rating");
+        addStudio.setText("Add movie studio");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -78,18 +84,18 @@ public class AddMovie extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(addGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(addStudio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
+                        .addGap(34, 34, 34)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addRating_txt1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addYear_txt1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(addStudio_txt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addGenre_txt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(addTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(addRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(addYear_txt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addDate_txt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(addTitle_txt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(addRating_txt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(51, 51, 51))
@@ -105,20 +111,20 @@ public class AddMovie extends javax.swing.JFrame {
                     .addComponent(addTitle_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addYear_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addDate_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addRating_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addYear_txt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addGenre_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addStudio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addRating_txt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addStudio_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(addMovieBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59))
@@ -147,6 +153,23 @@ public class AddMovie extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Label addDate;
+    private static java.awt.TextField addDate_txt;
+    private java.awt.Label addGenre;
+    private static java.awt.TextField addGenre_txt;
+    private static java.awt.Button addMovieBtn;
+    private java.awt.Label addRating;
+    private static java.awt.TextField addRating_txt;
+    private java.awt.Label addStudio;
+    private static java.awt.TextField addStudio_txt;
+    private java.awt.Label addTitle;
+    private static java.awt.TextField addTitle_txt;
+    private javax.swing.JPanel jPanel1;
+    private java.awt.Label label1;
+    // End of variables declaration//GEN-END:variables
+
     /**
      * @param args the command line arguments
      */
@@ -164,37 +187,54 @@ public class AddMovie extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddMovie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddMovieGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddMovie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddMovieGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddMovie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddMovieGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddMovie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddMovieGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddMovie().setVisible(true);
+                new AddMovieGUI().setVisible(true);
             }
         });
+        addMovieBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (MainGUI.returnMovieObj().addMovie(MainGUI.returnDbObj(), //big if condition
+                        addTitle_txt.getText(), addDate_txt.getText(), //
+                        Integer.parseInt(addGenre_txt.getText()), //
+                        Integer.parseInt(addStudio_txt.getText()), //
+                        Integer.parseInt(addRating_txt.getText()))) {       //
+                    JFrame frame = new JFrame();
+                    JPanel panel = new JPanel();
+                    JLabel label = new JLabel("Adding movie successful!");
+                    panel.add(label);
+                    frame.add(panel);
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+                    frame.pack();
+                    frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                } else {
+                    JFrame frame = new JFrame();
+                    JPanel panel = new JPanel();
+                    JLabel label = new JLabel("Adding movie failed");
+                    panel.add(label);
+                    frame.add(panel);
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+                    frame.pack();
+                    frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                }
+            }
+
+        });
+
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Label addGenre;
-    private java.awt.Button addMovieBtn;
-    private java.awt.Label addRating;
-    private java.awt.TextField addRating_txt;
-    private java.awt.TextField addRating_txt1;
-    private java.awt.Label addStudio;
-    private java.awt.Label addTitle;
-    private java.awt.TextField addTitle_txt;
-    private java.awt.Label addYear;
-    private java.awt.TextField addYear_txt;
-    private java.awt.TextField addYear_txt1;
-    private javax.swing.JPanel jPanel1;
-    private java.awt.Label label1;
-    // End of variables declaration//GEN-END:variables
 }

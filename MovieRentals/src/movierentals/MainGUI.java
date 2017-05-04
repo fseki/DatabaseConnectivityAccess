@@ -27,6 +27,8 @@ import static movierentals.MovieInfoGUI.studioInfoButton;
  */
 public class MainGUI extends javax.swing.JPanel {
 
+    private static Movie movie;
+
     /**
      * Creates the main GUI
      */
@@ -79,6 +81,8 @@ public class MainGUI extends javax.swing.JPanel {
         jmiExport = new javax.swing.JMenuItem();
         jmiExit = new javax.swing.JMenuItem();
         jmEdit = new javax.swing.JMenu();
+        addMovToDb = new javax.swing.JMenuItem();
+        rmMovFromDb = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -245,6 +249,23 @@ public class MainGUI extends javax.swing.JPanel {
         jMenuBar5.add(jmFile);
 
         jmEdit.setText("Edit");
+
+        addMovToDb.setText("Add movie to database");
+        addMovToDb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMovToDbActionPerformed(evt);
+            }
+        });
+        jmEdit.add(addMovToDb);
+
+        rmMovFromDb.setText("Remove movie from databse");
+        rmMovFromDb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rmMovFromDbActionPerformed(evt);
+            }
+        });
+        jmEdit.add(rmMovFromDb);
+
         jMenuBar5.add(jmEdit);
 
         jInternalFrame1.setJMenuBar(jMenuBar5);
@@ -282,14 +303,14 @@ public class MainGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGoActionPerformed
-        
+
         if (data != null) {
             data.clear();
         }
         String searchTerm = jtfSearch.getText().trim();
-        Movie movie = new Movie();
+        movie = new Movie();
         MoviesOnLoan loanedMovies = new MoviesOnLoan();
-        
+
         if (searchTerm.equals("")) {
             data = movie.fetchAll(database);
             DefaultTableModel model = (DefaultTableModel) jtMovies.getModel();
@@ -310,7 +331,7 @@ public class MainGUI extends javax.swing.JPanel {
                 model.addRow(row);
             }
         }
-        
+
         jtMovies.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
                 if (event.getValueIsAdjusting() == false) {
@@ -355,9 +376,9 @@ public class MainGUI extends javax.swing.JPanel {
                                 jbRent.setEnabled(true);
                             }
                         });
-                        
-                        actorInfoButton.addActionListener(new ActionListener(){
-                            public void actionPerformed(ActionEvent ae){
+
+                        actorInfoButton.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent ae) {
                                 Actor actor = new Actor();
                                 int movie_id = Integer.parseInt(data.get(row).get(0));
                                 String info = actor.getActorInfo(database, movie_id);
@@ -368,9 +389,9 @@ public class MainGUI extends javax.swing.JPanel {
                                 jtaFurtherInfo.setText(info);
                             }
                         });
-                        
-                        studioInfoButton.addActionListener(new ActionListener(){
-                            public void actionPerformed(ActionEvent ae){
+
+                        studioInfoButton.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent ae) {
                                 Studio studio = new Studio();
                                 int movie_id = Integer.parseInt(data.get(row).get(0));
                                 String info = studio.getStudioInfo(database, movie_id);
@@ -380,13 +401,14 @@ public class MainGUI extends javax.swing.JPanel {
                                 jtaFurtherInfo.setText(info);
                             }
                         });
-                        
+
                         jtMovies.clearSelection();
                     }
                 }
             }
         });
     }//GEN-LAST:event_jbGoActionPerformed
+
 
     private void jmiExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiExportActionPerformed
         UtilitiesClass utils = new UtilitiesClass();
@@ -397,10 +419,35 @@ public class MainGUI extends javax.swing.JPanel {
         System.exit(0);
     }//GEN-LAST:event_jmiExitActionPerformed
 
-    private MovieRentalsDatabase database;
+    private void rmMovFromDbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmMovFromDbActionPerformed
+        DeleteMovieGUI delMovGUI = new DeleteMovieGUI();
+        delMovGUI.setVisible(true);
+        delMovGUI.setLocationRelativeTo(null);
+        delMovGUI.pack();
+        delMovGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    }//GEN-LAST:event_rmMovFromDbActionPerformed
+
+    private void addMovToDbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMovToDbActionPerformed
+        AddMovieGUI addMovGUI = new AddMovieGUI();
+        addMovGUI.setVisible(true);
+        addMovGUI.setLocationRelativeTo(null);
+        addMovGUI.pack();
+        addMovGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    }//GEN-LAST:event_addMovToDbActionPerformed
+
+    private static MovieRentalsDatabase database;
     private ArrayList<ArrayList<String>> data;
 
+    public static Movie returnMovieObj() {
+        return movie;
+    }
+
+    public static MovieRentalsDatabase returnDbObj() {
+        return database;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem addMovToDb;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu11;
@@ -436,5 +483,6 @@ public class MainGUI extends javax.swing.JPanel {
     private javax.swing.JPanel jpSearch;
     private javax.swing.JTable jtMovies;
     private javax.swing.JTextField jtfSearch;
+    private javax.swing.JMenuItem rmMovFromDb;
     // End of variables declaration//GEN-END:variables
 }

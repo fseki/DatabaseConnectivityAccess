@@ -6,14 +6,20 @@
 
 package movierentals;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Marko
  */
-public class DeleteMovie extends javax.swing.JFrame {
+public class DeleteMovieGUI extends javax.swing.JFrame {
 
     /** Creates new form DeleteMovie */
-    public DeleteMovie() {
+    public DeleteMovieGUI() {
         initComponents();
     }
 
@@ -29,10 +35,16 @@ public class DeleteMovie extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         deleteMov = new java.awt.Label();
         deleteMov_txt = new java.awt.TextField();
+        deleteMovieLabel = new javax.swing.JLabel();
+        deleteMovBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        deleteMov.setText("Delete movie");
+        deleteMov.setText("Enter movie ID");
+
+        deleteMovieLabel.setText("Delete movie from database");
+
+        deleteMovBtn.setText("Delete");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -41,18 +53,31 @@ public class DeleteMovie extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(deleteMov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(deleteMov_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(deleteMovieLabel))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(147, 147, 147)
+                        .addComponent(deleteMovBtn)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(25, 25, 25)
+                .addComponent(deleteMovieLabel)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(deleteMov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteMov_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(deleteMovBtn)
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -75,6 +100,16 @@ public class DeleteMovie extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Label deleteMov;
+    private static javax.swing.JButton deleteMovBtn;
+    private static java.awt.TextField deleteMov_txt;
+    private javax.swing.JLabel deleteMovieLabel;
+    private javax.swing.JPanel jPanel1;
+    // End of variables declaration//GEN-END:variables
+    
     /**
      * @param args the command line arguments
      */
@@ -92,28 +127,55 @@ public class DeleteMovie extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeleteMovie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteMovieGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeleteMovie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteMovieGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeleteMovie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteMovieGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeleteMovie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteMovieGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DeleteMovie().setVisible(true);
+                DeleteMovieGUI deleteMovGUI = new DeleteMovieGUI();
+                deleteMovGUI.setVisible(true);
+                deleteMovGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                
             }
         });
+        
+        deleteMovBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(MainGUI.returnMovieObj().deleteMovie(MainGUI.returnDbObj(),  //if condition
+                        Integer.parseInt(deleteMov_txt.getText()))) {           //
+                    
+                    JFrame frame = new JFrame();
+                    JPanel panel = new JPanel();
+                    JLabel label = new JLabel("Deleting movie successful!");
+                    panel.add(label);
+                    frame.add(panel);
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+                    frame.pack();
+                    frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                } else{
+                    JFrame frame = new JFrame();
+                    JPanel panel = new JPanel();
+                    JLabel label = new JLabel("Deleting movie failed");
+                    panel.add(label);
+                    frame.add(panel);
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+                    frame.pack();
+                    frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                }
+            }
+
+        });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Label deleteMov;
-    private java.awt.TextField deleteMov_txt;
-    private javax.swing.JPanel jPanel1;
-    // End of variables declaration//GEN-END:variables
-
+    
 }

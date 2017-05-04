@@ -128,7 +128,7 @@ public class Movie {
      * @param date, The release date of the new movie
      * @param ageRating, The age rating of the new movie
      */
-    public void addMovie(MovieRentalsDatabase db, String title, String date, int genre, int studio, int ageRating) {
+    public boolean addMovie(MovieRentalsDatabase db, String title, String date, int genre, int studio, int ageRating) {
         boolean success = false;
         ArrayList<String> values = new ArrayList<String>();
 
@@ -149,15 +149,18 @@ public class Movie {
         } catch (InfoException ex) {
             System.out.println(ex.getInfo());
         }
+        return success;
     }
 
     /*
      * Method which will be used to delete movies from the administrator interface
      * @param db, Database object
      */
-    public void deleteMovie(MovieRentalsDatabase db) {
+    public boolean deleteMovie(MovieRentalsDatabase db, int movie_id) {
+        this.movie_id = movie_id;
+        boolean success = false;
         try {
-            boolean success = false;
+            
             ArrayList<String> values = new ArrayList<String>();
 
             values.add("" + movie_id);
@@ -174,6 +177,7 @@ public class Movie {
         } catch (InfoException ex) {
             System.out.println(ex.getInfo());
         }
+        return success;
     }
 
     /*
