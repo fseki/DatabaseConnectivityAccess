@@ -9,9 +9,12 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import static movierentals.FurtherInfoGUI.jtaFurtherInfo;
+import static movierentals.MovieInfoGUI.actorInfoButton;
 import static movierentals.MovieInfoGUI.jbRent;
 import static movierentals.MovieInfoGUI.jbReturn;
 import static movierentals.MovieInfoGUI.jtaInfo;
+import static movierentals.MovieInfoGUI.studioInfoButton;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -293,7 +296,7 @@ public class MainGUI extends javax.swing.JPanel {
             model.setRowCount(0);
 
             for (int i = 0; i < data.size(); i++) {
-                Object[] row = {data.get(i).get(0), data.get(i).get(1), data.get(i).get(2), data.get(i).get(3)};
+                Object[] row = {data.get(i).get(1), data.get(i).get(2), data.get(i).get(3), data.get(i).get(4)};
                 model.addRow(row);
             }
 
@@ -303,17 +306,17 @@ public class MainGUI extends javax.swing.JPanel {
             model.setRowCount(0);
 
             for (int i = 0; i < data.size(); i++) {
-                Object[] row = {data.get(i).get(0), data.get(i).get(1), data.get(i).get(2), data.get(i).get(3)};
+                Object[] row = {data.get(i).get(1), data.get(i).get(2), data.get(i).get(3), data.get(i).get(4)};
                 model.addRow(row);
             }
         }
-
+        
         jtMovies.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
                 if (event.getValueIsAdjusting() == false) {
                     int row = jtMovies.getSelectedRow();
                     if (row != -1) {
-                        String movieName = data.get(jtMovies.getSelectedRow()).get(0);
+                        String movieName = data.get(jtMovies.getSelectedRow()).get(1);
                         String movieInfo = movie.getMovieInfo(database, movieName);
                         MovieInfoGUI.main();
                         JFrame frame = new JFrame();
@@ -352,6 +355,32 @@ public class MainGUI extends javax.swing.JPanel {
                                 jbRent.setEnabled(true);
                             }
                         });
+                        
+                        actorInfoButton.addActionListener(new ActionListener(){
+                            public void actionPerformed(ActionEvent ae){
+                                Actor actor = new Actor();
+                                int movie_id = Integer.parseInt(data.get(row).get(0));
+                                String info = actor.getActorInfo(database, movie_id);
+                                //System.out.println(info);
+                                FurtherInfoGUI infoGui = new FurtherInfoGUI();
+                                infoGui.setVisible(true);
+                                infoGui.setLocationRelativeTo(null);
+                                jtaFurtherInfo.setText(info);
+                            }
+                        });
+                        
+                        studioInfoButton.addActionListener(new ActionListener(){
+                            public void actionPerformed(ActionEvent ae){
+                                Studio studio = new Studio();
+                                int movie_id = Integer.parseInt(data.get(row).get(0));
+                                String info = studio.getStudioInfo(database, movie_id);
+                                FurtherInfoGUI infoGui = new FurtherInfoGUI();
+                                infoGui.setVisible(true);
+                                infoGui.setLocationRelativeTo(null);
+                                jtaFurtherInfo.setText(info);
+                            }
+                        });
+                        
                         jtMovies.clearSelection();
                     }
                 }

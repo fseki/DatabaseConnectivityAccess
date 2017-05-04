@@ -62,20 +62,20 @@ public class Movie {
             release_date = data.get(0).get(2);
             genre = data.get(0).get(3);
             age_rating = Integer.parseInt(data.get(0).get(4));
-
+            
+            /*
             for (int i = 0; i < data.size(); i++) {
                 dataToReturn.add(new ArrayList<String>());
                 for (int m = 1; m < data.get(i).size(); m++) {
                     dataToReturn.get(i).add(data.get(i).get(m));
                 }
-            }
+            }*/
 
-            data.get(0).remove(0); //removing the id so that it is not shown in the print out
         } catch (InfoException ie) {
             System.out.println(ie.getInfo());
         }
 
-        return dataToReturn;
+        return data;
     }
 
     /*
@@ -104,14 +104,15 @@ public class Movie {
                 genre = data.get(0).get(3);
                 age_rating = Integer.parseInt(data.get(0).get(4));
 
+                /*
                 for (int i = 0; i < data.size(); i++) {
                     dataToReturn.add(new ArrayList<String>());
                     for (int m = 1; m < data.get(i).size(); m++) {
                         dataToReturn.get(i).add(data.get(i).get(m));
                     }
-                }
+                }*/
 
-                data.get(0).remove(0); //removing the id so that it is not shown in the printout
+                //data.get(0).remove(0); //removing the id so that it is not shown in the printout
             }
         } catch (InfoException ex) {
             System.out.println(ex.getInfo());
@@ -127,15 +128,17 @@ public class Movie {
      * @param date, The release date of the new movie
      * @param ageRating, The age rating of the new movie
      */
-    public void addMovie(MovieRentalsDatabase db, String title, String date, int ageRating) {
+    public void addMovie(MovieRentalsDatabase db, String title, String date, int genre, int studio, int ageRating) {
         boolean success = false;
         ArrayList<String> values = new ArrayList<String>();
 
         values.add(title);
         values.add(date);
+        values.add("" + genre);
+        values.add("" + studio);
         values.add("" + ageRating);
 
-        String query = "INSERT INTO movie(title, release_year, age_rating) VALUES(?, ?, ?)";
+        String query = "INSERT INTO movie(movie_title, release_year, genre_id, studio_id, age_rating) VALUES(?, ?, ?, ?, ?)";
         try {
             success = db.setData(query, values);
             if (success) {
