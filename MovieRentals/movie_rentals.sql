@@ -1,5 +1,5 @@
 /* Creation of the database and tables */
-
+DROP DATABASE movie_rentals;
 CREATE DATABASE movie_rentals;
 USE movie_rentals;
 
