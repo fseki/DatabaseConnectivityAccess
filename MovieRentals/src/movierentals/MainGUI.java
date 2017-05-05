@@ -32,13 +32,16 @@ public class MainGUI extends javax.swing.JPanel {
 
     private static Movie movie = new Movie();
 
-    ;
-
     /**
      * Creates the main GUI
      */
     public MainGUI(MovieRentalsDatabase db) {
         initComponents();
+        
+        //enables admin features if the user is an admin
+        if (ConnectionGUI.getUser().getUserRole().equalsIgnoreCase("Administrator")){
+            jmEdit.setEnabled(true);
+        }
         ConnectionGUI.database = db;
     }
 
@@ -137,7 +140,7 @@ public class MainGUI extends javax.swing.JPanel {
         jtfSearch.setToolTipText("Enter Movie Name Here");
 
         jbGo.setText("Go");
-        jbGo.setToolTipText("");
+        jbGo.setToolTipText("Leave search field empty to get all the movies.");
         jbGo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGoActionPerformed(evt);
@@ -254,6 +257,7 @@ public class MainGUI extends javax.swing.JPanel {
         jMenuBar5.add(jmFile);
 
         jmEdit.setText("Edit");
+        jmEdit.setEnabled(false);
 
         addMovToDb.setText("Add movie to database");
         addMovToDb.addActionListener(new java.awt.event.ActionListener() {
@@ -308,7 +312,7 @@ public class MainGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGoActionPerformed
-
+        inMenu = true;
         if (data != null) {
             data.clear();
         }
@@ -343,12 +347,13 @@ public class MainGUI extends javax.swing.JPanel {
                     int row = jtMovies.getSelectedRow();
                     if (row != -1) {
                         String movieName = data.get(jtMovies.getSelectedRow()).get(1);
-                        String movieInfo = movie.getMovieInfo(database, movieName);
+                        movieInfo = movie.getMovieInfo(database, movieName);
                         MovieInfoGUI.main();
                         MovieInfoGUI gui = new MovieInfoGUI();
                         gui.setVisible(true);
                         gui.setLocationRelativeTo(null);
                         jtaInfo.setText(movieInfo);
+                        inMenu = false;
 
                         if (movie.isRented()) {
                             jbRent.setEnabled(false);
@@ -412,10 +417,18 @@ public class MainGUI extends javax.swing.JPanel {
         });
     }//GEN-LAST:event_jbGoActionPerformed
 
-
+    
+    //based on the context, export will perform different things
+    //if the user is in the main menu, the movies list will be exported
+    //otherwise, movie info will be exported
     private void jmiExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiExportActionPerformed
         UtilitiesClass utils = new UtilitiesClass();
-        utils.exportMoviesToFile(data);
+        if (inMenu){
+            utils.exportMoviesToFile(data);
+        }
+        else{
+            utils.exportMovieInfoToFile(movieInfo);
+        }
     }//GEN-LAST:event_jmiExportActionPerformed
 
     private void jmiExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiExitActionPerformed
@@ -458,6 +471,8 @@ public class MainGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_addMovToDbActionPerformed
 
     private static ArrayList<ArrayList<String>> data;
+    private static String movieInfo;
+    private static boolean inMenu = false;
 
     public static Movie returnMovieObj() {
         return movie;
@@ -496,7 +511,7 @@ public class MainGUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbGo;
     private javax.swing.JLabel jlSearch;
-    private javax.swing.JMenu jmEdit;
+    public static javax.swing.JMenu jmEdit;
     private javax.swing.JMenu jmFile;
     private javax.swing.JMenuItem jmiExit;
     private javax.swing.JMenuItem jmiExport;

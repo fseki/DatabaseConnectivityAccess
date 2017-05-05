@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -74,7 +74,7 @@ public class MovieRentalsDatabase {
 	 * Method to connect to a database
 	 * @return true or false, depending on connection success
      */
-    public boolean connect() throws InfoException{
+    public boolean connect() throws InfoException {
         try {
             String driver = "com.mysql.jdbc.Driver";
             String mysqlURI = "jdbc:mysql://" + dbServer + ":" + port + "/" + dbName + "?useSSL=false";
@@ -103,7 +103,7 @@ public class MovieRentalsDatabase {
 	 * Method to close the database connection
 	 * @return true or false, depending on closing success
      */
-    public boolean close() throws InfoException{
+    public boolean close() throws InfoException {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
@@ -130,7 +130,7 @@ public class MovieRentalsDatabase {
 	 * @param query, Query to be executed
 	 * @return results, The array populated with query results
      */
-    public ArrayList<ArrayList<String>> getData(String query) throws InfoException{
+    public ArrayList<ArrayList<String>> getData(String query) throws InfoException {
         ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
 
         int numCols = 4;
@@ -171,7 +171,7 @@ public class MovieRentalsDatabase {
 	 * @param incColName, boolean for including the column names
 	 * @return results, The array populated with query results
      */
-    public ArrayList<ArrayList<String>> getData(String query, boolean incColName) throws InfoException{
+    public ArrayList<ArrayList<String>> getData(String query, boolean incColName) throws InfoException {
         ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
 
         try {
@@ -212,7 +212,7 @@ public class MovieRentalsDatabase {
 	 * Method which updates the database with the given query string
 	 * @return true or false, depending on the success of the query
      */
-    public boolean setData(String query) throws InfoException{
+    public boolean setData(String query) throws InfoException {
         try {
             int rowsAffected = statement.executeUpdate(query);
 
@@ -238,18 +238,17 @@ public class MovieRentalsDatabase {
 	 * @param values, ArrayList with values to be used in the query
 	 * @return pStatement, The PreparedStatement object
      */
-    public PreparedStatement prepare(String statement, ArrayList<String> values) throws InfoException{
+    public PreparedStatement prepare(String statement, ArrayList<String> values) throws InfoException {
         try {
             pStatement = connection.prepareStatement(statement);
             for (int i = 0; i < values.size(); i++) {
-                try{
+                try {
                     int n = Integer.parseInt(values.get(i));
                     pStatement.setInt(i + 1, n);
-                }
-                catch (NumberFormatException nfe){
+                } catch (NumberFormatException nfe) {
                     pStatement.setString(i + 1, values.get(i));
                 }
-                
+
             }
 
         } catch (SQLException se) {
@@ -259,7 +258,7 @@ public class MovieRentalsDatabase {
         }
         return pStatement;
     }
-    
+
     /*
      * Method that is used to get data from the databse in cases where a select from
      * multiple tables is being performed
@@ -268,8 +267,8 @@ public class MovieRentalsDatabase {
      * @param statement, Query to be executed
      * @param values, Values to be bound to the statement
      * @param numCols, Number of columns involved in the statement
-    */
-    public ArrayList<ArrayList<String>> getDataWithSpecificNumCols(String statement, ArrayList<String> values, int numCols) throws InfoException{
+     */
+    public ArrayList<ArrayList<String>> getDataWithSpecificNumCols(String statement, ArrayList<String> values, int numCols) throws InfoException {
         ArrayList<ArrayList<String>> data = null;
         int m = 0;
 
@@ -301,7 +300,7 @@ public class MovieRentalsDatabase {
         }
         return data;
     }
-    
+
     /*
 	 * Method that queries the database with the given query, using a prepared statement
 	 * Also stores query results into an array
@@ -309,7 +308,7 @@ public class MovieRentalsDatabase {
 	 * @param values, ArrayList of values that fill the query
 	 * @return data, 2D ArrayList filled with query results
      */
-    public ArrayList<ArrayList<String>> getData(String statement, ArrayList<String> values) throws InfoException{
+    public ArrayList<ArrayList<String>> getData(String statement, ArrayList<String> values) throws InfoException {
         ArrayList<ArrayList<String>> data = null;
         int numCols = 0;
         int m = 1;
@@ -365,7 +364,7 @@ public class MovieRentalsDatabase {
 	 * @param values, The ArrayList with query values
 	 * @return true or false, depending on the success of the query
      */
-    public boolean setData(String statement, ArrayList<String> values) throws InfoException{
+    public boolean setData(String statement, ArrayList<String> values) throws InfoException {
         boolean successful = false;
         try {
             PreparedStatement prepStatement = prepare(statement, values);
@@ -378,20 +377,16 @@ public class MovieRentalsDatabase {
                 successful = true;
             }
             prepStatement.close();
-        }
-        catch (SQLException se) {
-            try{
-                com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException violationEx = (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException)se;
+        } catch (SQLException se) {
+            try {
+                com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException violationEx = (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException) se;
                 JOptionPane.showMessageDialog(null, "Username already in use.\nPlease select another username.");
-            }
-            catch (ClassCastException cce){
-                System.out.println("An error occurred...");                
+            } catch (ClassCastException cce) {
+                System.out.println("An error occurred...");
                 throw new InfoException(se, se.getSQLState(), se.getErrorCode(), se.getMessage());
-                
+
             }
-        } 
-        
-        catch (Exception e) {
+        } catch (Exception e) {
             //System.out.println("Could not update the database.");
             e.printStackTrace();
         }
@@ -402,7 +397,7 @@ public class MovieRentalsDatabase {
 	 * Method which configures the database to not use auto-commits
 	 * Equivalent of starting a transaction
      */
-    public void startTrans() throws InfoException{
+    public void startTrans() throws InfoException {
         try {
             connection.setAutoCommit(false);
             System.out.println("Transaction started...");
@@ -417,7 +412,7 @@ public class MovieRentalsDatabase {
 	 * Method which commits all changes made and ends the transaction
 	 * by enabling auto-commits again
      */
-    public void endTrans(){
+    public void endTrans() {
         try {
             connection.commit();
             connection.setAutoCommit(true);

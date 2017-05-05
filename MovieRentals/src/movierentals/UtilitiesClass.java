@@ -2,11 +2,8 @@ package movierentals;
 
 import java.io.*;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -30,19 +27,25 @@ public class UtilitiesClass {
         data = dataToExport;
         try {
             PrintWriter pw = new PrintWriter(fileToExportMovies);
-            pw.printf("%-25s%-15s%-15s%-10s", "Movie Name", "Release Date", "Genre", "Age Rating");
-            pw.println("");
-            pw.println();
-            pw.flush();
-
-            String line = "";
-            for (int i = 0; i < data.size(); i++) {
-                pw.printf("%-25s%-15s%-15s%-10s", data.get(i).get(0), data.get(i).get(1), data.get(i).get(2), data.get(i).get(3));
+            if (data == null) {
+                pw.println("No data available...");
+                pw.flush();
+            } else {
+                pw.printf("%-25s%-15s%-15s%-10s", "Movie Name", "Release Date", "Genre", "Age Rating");
+                pw.println("");
                 pw.println();
                 pw.flush();
+
+                String line = "";
+                for (int i = 0; i < data.size(); i++) {
+                    pw.printf("%-25s%-15s%-15s%-10s", data.get(i).get(1), data.get(i).get(2), data.get(i).get(3), data.get(i).get(4));
+                    pw.println();
+                    pw.flush();
+                }
+                pw.close();
+                JOptionPane.showMessageDialog(null, "Movies exported successfully!");
             }
-            pw.close();
-            JOptionPane.showMessageDialog(null, "Movies exported successfully!");
+
         } catch (FileNotFoundException fnf) {
             System.out.println("The file to which you want to export has not been found.");
         }
@@ -52,11 +55,16 @@ public class UtilitiesClass {
         movieInfo = infoToExport;
         try {
             PrintWriter pw = new PrintWriter(fileToExportMovieInfo);
+            if (movieInfo == null) {
+                pw.println("No data available...");
+                pw.flush();
+            } else {
+                pw.println(movieInfo);
+                pw.flush();
+                pw.close();
+                JOptionPane.showMessageDialog(null, "Movie Info exported successfully!");
+            }
 
-            pw.println(movieInfo);
-            pw.flush();
-            pw.close();
-            System.out.println("Successfully exported movie info.");
         } catch (FileNotFoundException fnf) {
             System.out.println("The file to which you want to export has not been found.");
         }

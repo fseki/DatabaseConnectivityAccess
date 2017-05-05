@@ -1,3 +1,0 @@
-Movie Name               Release Date   Genre          Age Rating
-
-Sinister                 2012-03-11     Horror         18        

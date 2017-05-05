@@ -4,8 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -50,8 +48,8 @@ public class User {
     public int getUserID() {
         return user_id;
     }
-    
-    public String getUserRole(){
+
+    public String getUserRole() {
         return role;
     }
 

@@ -163,38 +163,13 @@ public class DeleteMovieGUI extends javax.swing.JFrame {
 
                 if (choice == JOptionPane.YES_OPTION) {
                     if (MainGUI.returnMovieObj().deleteMovie(ConnectionGUI.returnDbObj(), Integer.parseInt(deleteMov_txt.getText()))) {
-
-                        JFrame frame = new JFrame();
-                        JPanel panel = new JPanel();
-                        JLabel label = new JLabel("Deleting movie successful!");
-                        panel.add(label);
-                        frame.add(panel);
-                        frame.setVisible(true);
-                        frame.setLocationRelativeTo(null);
-                        frame.pack();
-                        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                        JOptionPane.showMessageDialog(null, "Successfully deleted the movie!");
                     } else {
-                        JFrame frame = new JFrame();
-                        JPanel panel = new JPanel();
-                        JLabel label = new JLabel("Deleting movie failed");
-                        panel.add(label);
-                        frame.add(panel);
-                        frame.setVisible(true);
-                        frame.setLocationRelativeTo(null);
-                        frame.pack();
-                        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                        JOptionPane.showMessageDialog(null, "Failed to delete the movie...");
                     }
 
                 } else if (choice == JOptionPane.NO_OPTION) {
-                    JFrame frame = new JFrame();
-                    JPanel panel = new JPanel();
-                    JLabel label = new JLabel("You chose not to delete the movie");
-                    panel.add(label);
-                    frame.add(panel);
-                    frame.setVisible(true);
-                    frame.setLocationRelativeTo(null);
-                    frame.pack();
-                    frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                    JOptionPane.showMessageDialog(null, "You chose to not delete the movie");
                 }
 
             }

@@ -63,13 +63,6 @@ public class Movie {
             genre = data.get(0).get(3);
             age_rating = Integer.parseInt(data.get(0).get(4));
 
-            /*
-            for (int i = 0; i < data.size(); i++) {
-                dataToReturn.add(new ArrayList<String>());
-                for (int m = 1; m < data.get(i).size(); m++) {
-                    dataToReturn.get(i).add(data.get(i).get(m));
-                }
-            }*/
         } catch (InfoException ie) {
             System.out.println(ie.getInfo());
         }
@@ -94,26 +87,17 @@ public class Movie {
 
         try {
             data = db.getDataWithSpecificNumCols(query, values, 5);
-            if (data == null) {
-                JOptionPane.showMessageDialog(null, "No movies pertaining your search found.");
-            } else {
-                movie_id = Integer.parseInt(data.get(0).get(0));
-                title = data.get(0).get(1);
-                release_date = data.get(0).get(2);
-                genre = data.get(0).get(3);
-                age_rating = Integer.parseInt(data.get(0).get(4));
 
-                /*
-                for (int i = 0; i < data.size(); i++) {
-                    dataToReturn.add(new ArrayList<String>());
-                    for (int m = 1; m < data.get(i).size(); m++) {
-                        dataToReturn.get(i).add(data.get(i).get(m));
-                    }
-                }*/
-                //data.get(0).remove(0); //removing the id so that it is not shown in the printout
-            }
+            movie_id = Integer.parseInt(data.get(0).get(0));
+            title = data.get(0).get(1);
+            release_date = data.get(0).get(2);
+            genre = data.get(0).get(3);
+            age_rating = Integer.parseInt(data.get(0).get(4));
+
         } catch (InfoException ex) {
             System.out.println(ex.getInfo());
+        } catch (IndexOutOfBoundsException obe) {
+            JOptionPane.showMessageDialog(null, "No movies pertaining your search found...");
         }
 
         return data;
@@ -135,7 +119,7 @@ public class Movie {
         } catch (InfoException ex) {
             System.out.println(ex.getInfo());
         }
-        
+
         return title;
     }
 
@@ -209,6 +193,7 @@ public class Movie {
      */
     public String getMovieInfo(MovieRentalsDatabase db, String movieName) {
         String output = "\nRented: ";
+
         try {
             ArrayList<ArrayList<String>> data;
             ArrayList<String> values = new ArrayList<String>();
@@ -235,7 +220,6 @@ public class Movie {
                     output += "Yes\n\n";
                     setRented(true);
                 }
-
             }
 
             //getting movie information
@@ -299,6 +283,8 @@ public class Movie {
 
         } catch (InfoException ex) {
             System.out.println(ex.getInfo());
+        } catch (IndexOutOfBoundsException ibe) {
+            JOptionPane.showMessageDialog(null, "Oops, it seems like there is some information missing for this movie.");
         }
         return output;
     }
@@ -314,7 +300,6 @@ public class Movie {
                 result += "\n";
             }
         }
-
         return result;
     }
 }

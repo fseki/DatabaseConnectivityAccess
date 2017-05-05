@@ -184,8 +184,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null);
                 frame.pack();
-                //LogGui.setVisible(false);
-                //LogGui.dispose();
+                
                 regButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         String username = reg.jtfUsername.getText().trim();

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /*
@@ -207,32 +208,32 @@ public class AddMovieGUI extends javax.swing.JFrame {
         });
         addMovieBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println(MainGUI.returnMovieObj().toString());
-                System.out.println(ConnectionGUI.returnDbObj().toString());
-                if (MainGUI.returnMovieObj().addMovie(ConnectionGUI.returnDbObj(), //big if condition
-                        addTitle_txt.getText(), addDate_txt.getText(), //
-                        Integer.parseInt(addGenre_txt.getText()), //
-                        Integer.parseInt(addStudio_txt.getText()), //
-                        Integer.parseInt(addRating_txt.getText()))) {               //
-                    JFrame frame = new JFrame();
-                    JPanel panel = new JPanel();
-                    JLabel label = new JLabel("Adding movie successful!");
-                    panel.add(label);
-                    frame.add(panel);
-                    frame.setVisible(true);
-                    frame.setLocationRelativeTo(null);
-                    frame.pack();
-                    frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                String name = addTitle_txt.getText().trim();
+                String date = addDate_txt.getText().trim();
+                String genre = addGenre_txt.getText().trim();
+                String studio = addStudio_txt.getText().trim();
+                String rating = addRating_txt.getText().trim();
+
+                if (name.equals("") || name.equals("Enter movie name")) {
+                    addTitle_txt.setText("Enter movie name");
+                } else if (date.equals("") || date.equals("Enter release date")) {
+                    addDate_txt.setText("Enter release date");
+                } else if (genre.equals("") || genre.equals("Enter genre id")) {
+                    addGenre_txt.setText("Enter genre id");
+                } else if (studio.equals("") || studio.equals("Enter studio id")) {
+                    addStudio_txt.setText("Enter studio id");
+                } else if (rating.equals("") || rating.equals("Enter age rating")) {
+                    addRating_txt.setText("Enter age rating");
                 } else {
-                    JFrame frame = new JFrame();
-                    JPanel panel = new JPanel();
-                    JLabel label = new JLabel("Adding movie failed");
-                    panel.add(label);
-                    frame.add(panel);
-                    frame.setVisible(true);
-                    frame.setLocationRelativeTo(null);
-                    frame.pack();
-                    frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                    if (MainGUI.returnMovieObj().addMovie(ConnectionGUI.returnDbObj(), //big if condition
+                            name, date, //
+                            Integer.parseInt(genre), //
+                            Integer.parseInt(studio), //
+                            Integer.parseInt(rating))) {               //
+                        JOptionPane.showMessageDialog(null, "Successfully added a movie!");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Failed to add a movie...");
+                    }
                 }
             }
 
