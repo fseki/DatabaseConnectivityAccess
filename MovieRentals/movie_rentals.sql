@@ -40,9 +40,9 @@ INSERT INTO user values(1, "narf666", "7c296ead0000d944de8f189c011f2ddeebe00ffd5
 INSERT INTO user values(2, "micaubica", "2133608c91e2466d33f07928be0d80d8dd249889f28cbd002828a9145a10076288967e3ec8b71780b19af3d002c86e1e74741fcd0232da5102ac07654ae03be8",
  "mxp1111@rit.edu", "Marko", "Parac", "Administrator"); /*pass: micaubicaPass */
 INSERT INTO user values(3, "starboy", "af54f6aa5c8bbb51ad92e97782e7f2bf1db6f25a8d8d09f07c83e88a531a0adf19ee16bec14c0714bdf461abc4e52c9c8657355ee34a703d861808039d155205",
- "fxs5520@rit.edu", "Matija", "Ozetski", "Administrator"); /*pass: starboyPass */
+ "mxo8807@rit.edu", "Matija", "Ozetski", "Administrator"); /*pass: starboyPass */
 INSERT INTO user values(4, "chenga", "564a82e87d8d1095a0f7a7e79645babbd0dc09727cbad124bb928a98af70affb98b3ad1541237a62489198b65b209919b4bf8961f5f46399b6cd7910381442ba",
- "fxs5520@rit.edu", "Adi", "Cengic", "Administrator"); /*pass: chengaPass */
+ "axc2629@rit.edu", "Adi", "Cengic", "Administrator"); /*pass: chengaPass */
 INSERT INTO user values(5, "zivac", "e859146dc59d3f85379bfe376ff7357131102e3b78775bffa57a2abd62cb0d2a8da01172cabc1a9cc80fe2d6564e1d52604f24f72ca38f30a76116002c67b300",
  "mxz9982@rit.edu", "Marko", "Zivko", "Administrator"); /*pass: zivacPass */
 
