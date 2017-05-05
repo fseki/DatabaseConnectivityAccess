@@ -66,11 +66,11 @@
                               <Component id="addTitle" min="-2" max="-2" attributes="0"/>
                               <Component id="addRating" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="addDate_txt" alignment="0" max="32767" attributes="0"/>
-                              <Component id="addTitle_txt" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="addDate_txt" max="32767" attributes="0"/>
                               <Component id="addRating_txt" max="32767" attributes="0"/>
+                              <Component id="addTitle_txt" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -131,17 +131,17 @@
       <SubComponents>
         <Component class="java.awt.Label" name="addTitle">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add movie title"/>
+            <Property name="text" type="java.lang.String" value="Movie Title"/>
           </Properties>
         </Component>
         <Component class="java.awt.Label" name="addDate">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add movie date"/>
+            <Property name="text" type="java.lang.String" value="Release Year"/>
           </Properties>
         </Component>
         <Component class="java.awt.Label" name="addRating">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add movie rating"/>
+            <Property name="text" type="java.lang.String" value="Age Rating"/>
           </Properties>
         </Component>
         <Component class="java.awt.TextField" name="addTitle_txt">
@@ -166,7 +166,7 @@
         </Component>
         <Component class="java.awt.Label" name="addGenre">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add movie genre"/>
+            <Property name="text" type="java.lang.String" value="Genre ID"/>
           </Properties>
         </Component>
         <Component class="java.awt.TextField" name="addGenre_txt">
@@ -181,7 +181,7 @@
         </Component>
         <Component class="java.awt.Label" name="addStudio">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add movie studio"/>
+            <Property name="text" type="java.lang.String" value="Studio ID"/>
           </Properties>
         </Component>
         <Component class="java.awt.Button" name="addMovieBtn">

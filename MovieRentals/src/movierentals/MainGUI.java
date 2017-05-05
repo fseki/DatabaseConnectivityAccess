@@ -28,7 +28,7 @@ import static movierentals.MovieInfoGUI.studioInfoButton;
  */
 public class MainGUI extends javax.swing.JPanel {
 
-    private static Movie movie;
+    private static Movie movie = new Movie();;
 
     /**
      * Creates the main GUI
@@ -309,7 +309,7 @@ public class MainGUI extends javax.swing.JPanel {
             data.clear();
         }
         String searchTerm = jtfSearch.getText().trim();
-        movie = new Movie();
+        
         MoviesOnLoan loanedMovies = new MoviesOnLoan();
 
         if (searchTerm.equals("")) {

@@ -136,7 +136,7 @@ public class Movie {
         values.add("" + studio);
         values.add("" + ageRating);
 
-        String query = "INSERT INTO movie(movie_title, release_year, genre_id, studio_id, age_rating) VALUES(?, ?, ?, ?, ?)";
+        String query = "INSERT INTO movie(movie_title, movie_year, genre_id, studio_id, age_rating) VALUES(?, ?, ?, ?, ?)";
         try {
             success = db.setData(query, values);
             if (success) {

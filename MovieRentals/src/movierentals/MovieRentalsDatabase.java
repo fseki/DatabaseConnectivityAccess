@@ -385,7 +385,9 @@ public class MovieRentalsDatabase {
                 JOptionPane.showMessageDialog(null, "Username already in use.\nPlease select another username.");
             }
             catch (ClassCastException cce){
-                throw new InfoException(cce);
+                System.out.println("An error occurred...");                
+                throw new InfoException(se, se.getSQLState(), se.getErrorCode(), se.getMessage());
+                
             }
         } 
         
