@@ -1,17 +1,30 @@
 package movierentals;
 
 import java.util.*;
-
+/**
+ * Class Studio which get studio information
+ *
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0 
+ * ISTE-330.700 
+ * prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
+ */
 public class Studio {
     
     private int studio_id;
     private String name;
     private String city;
-    
-    public Studio(){
-        
-    }
-    
+    /**
+     * Default Constructor
+     */
+    public Studio(){}
+    /**
+     * Method getStudioInfo
+     * @param db type MovieRentalsDatabase 
+     * @param movie_id type integer
+     * @return 
+     */
     public String getStudioInfo(MovieRentalsDatabase db, int movie_id){
         String info = "";
         ArrayList<ArrayList<String>> data;
@@ -34,7 +47,6 @@ public class Studio {
         catch (InfoException ie){
             System.out.println(ie.getInfo());
         }
-        
         return info;
     }
 }

@@ -7,14 +7,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
+ * Class with GUI for adding a movie; JFrame form used 
  *
- * @author Marko
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0 
+ * ISTE-330.700 
+ * prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
  */
 public class AddMovieGUI extends javax.swing.JFrame {
 
@@ -206,6 +206,7 @@ public class AddMovieGUI extends javax.swing.JFrame {
                 addMovGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             }
         });
+        //added action listener for a add movie button
         addMovieBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = addTitle_txt.getText().trim();
@@ -236,9 +237,6 @@ public class AddMovieGUI extends javax.swing.JFrame {
                     }
                 }
             }
-
         });
-
     }
-
 }

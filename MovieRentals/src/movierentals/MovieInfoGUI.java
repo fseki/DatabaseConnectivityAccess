@@ -8,12 +8,18 @@ package movierentals;
 import javax.swing.JFrame;
 
 /**
+ * Class with GUI for movie information; JFrame form used 
  *
- * @author Fran
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0 
+ * ISTE-330.700 
+ * prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
  */
 public class MovieInfoGUI extends javax.swing.JFrame {
 
     /**
+     * Constructor
      * Creates new form MovieInfoGUI
      */
     public MovieInfoGUI() {
@@ -104,7 +110,6 @@ public class MovieInfoGUI extends javax.swing.JFrame {
      */
     public static void main() {
         
-        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -127,8 +132,6 @@ public class MovieInfoGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MovieInfoGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

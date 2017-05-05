@@ -8,9 +8,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/*
- * Class whose object handles the business side of the login and
- * registration process
+/**
+ * Class whose object handles the business side of the login and registration process
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0 
+ * ISTE-330.700 
+ * prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
  */
 public class User {
 
@@ -22,19 +26,32 @@ public class User {
     private String fName;
     private String lName;
     private String role;
-
     private MovieRentalsDatabase database;
-
     private final String SALT = "random";
-
+    /**
+     * Constructor
+     * @param db type MovieRentalsDatabase
+     */
     public User(MovieRentalsDatabase db) {
         database = db;
     }
-
+    /**
+     * Constructor
+     * @param id type integer
+     */
     public User(int id) {
         user_id = id;
     }
-
+    /**
+     * Constructor
+     * @param db type MovieRentalsDatabase
+     * @param id type integer
+     * @param username type String
+     * @param password type String
+     * @param fName type String
+     * @param lName type String 
+     * @param role type String 
+     */
     public User(MovieRentalsDatabase db, int id, String username, String password, String fName, String lName, String role) {
         database = db;
         user_id = id;
@@ -44,15 +61,26 @@ public class User {
         this.lName = lName;
         this.role = role;
     }
-
+    /**
+     * Method to getUserID
+     * @return 
+     */
     public int getUserID() {
         return user_id;
     }
-
+    /**
+     * Method to getUserRole
+     * @return 
+     */
     public String getUserRole() {
         return role;
     }
-
+    /**
+     * Method to login
+     * @param newUsername type String
+     * @param newPassword type String
+     * @return 
+     */
     public boolean login(String newUsername, String newPassword) {
         boolean valid = false;
         try {
@@ -89,7 +117,16 @@ public class User {
 
         return valid;
     }
-
+    /**
+     * Method check registration
+     * @param newUsername type String
+     * @param newPassword type String
+     * @param newConfPassword type String
+     * @param newEmail type String
+     * @param newFname type String
+     * @param newLname type String
+     * @return 
+     */
     public boolean register(String newUsername, String newPassword, String newConfPassword, String newEmail, String newFname, String newLname) {
         boolean success = false;
         try {
@@ -136,7 +173,12 @@ public class User {
         }
         return success;
     }
-
+    /**
+     * Method to hashPassword
+     * @param passwordToHash type String
+     * @param salt type String
+     * @return 
+     */
     public String hashPassword(String passwordToHash, String salt) {
         String hashedPassword = null;
         try {
@@ -154,7 +196,5 @@ public class User {
             ue.printStackTrace();
         }
         return hashedPassword;
-
     }
-
 }

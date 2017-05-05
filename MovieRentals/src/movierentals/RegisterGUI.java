@@ -9,8 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ * Class with methods and attributes to connect to a database, manipulate
+ * database data, and close the connection
  *
- * @author student
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0 
+ * ISTE-330.700 
+ * prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
  */
 public class RegisterGUI extends javax.swing.JPanel {
 
@@ -162,11 +168,17 @@ public class RegisterGUI extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Method for JTextField with ActionPerformed event
+     * @param evt 
+     */
     private void jtfUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfUsernameActionPerformed
-
+    /**
+     * Method for register button with ActionPerformed event 
+     * @param evt 
+     */
     private void regButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_regButtonActionPerformed
@@ -189,6 +201,5 @@ public class RegisterGUI extends javax.swing.JPanel {
     public static javax.swing.JButton regButton;
     private java.awt.Label username;
     // End of variables declaration//GEN-END:variables
-
 
 }

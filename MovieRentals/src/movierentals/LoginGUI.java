@@ -15,12 +15,18 @@ import javax.swing.JPanel;
 import static movierentals.RegisterGUI.regButton;
 
 /**
+ * Class with GUI for login screen; JFrame form used
  *
- * @author Adi
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0 
+ * ISTE-330.700 
+ * prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
  */
 public class LoginGUI extends javax.swing.JFrame {
 
     /**
+     * Default constructor no parameters
      * Creates new form MovieRentalsGUI
      */
     public LoginGUI() {
@@ -147,7 +153,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 LogGui.setVisible(true);
             }
         });
-
+        //added ActionListener for logging button
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (ConnectionGUI.getUser().login(userField.getText(), passField.getText())) {
@@ -175,7 +181,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 }
             }
         });
-
+        //added ActionListener for register button
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 RegisterGUI reg = new RegisterGUI();
@@ -184,7 +190,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null);
                 frame.pack();
-                
+                //added ActionListener for registratorin buton
                 regButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         String username = reg.jtfUsername.getText().trim();
@@ -217,7 +223,5 @@ public class LoginGUI extends javax.swing.JFrame {
                 });
             }
         });
-
     }
-
 }

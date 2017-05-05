@@ -8,13 +8,18 @@ package movierentals;
 import javax.swing.JFrame;
 
 /**
+ * Class with GUI for deleting a movie; JFrame form used
  *
- * @author Fran
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0 
+ * ISTE-330.700 
+ * prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
  */
 public class FurtherInfoGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form FurtherInfoGUI
+     * Creates new form FurtherInfoGUI for information about actors and movie; JFrame form used
      */
     public FurtherInfoGUI() {
         initComponents();
@@ -96,7 +101,6 @@ public class FurtherInfoGUI extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     public static java.awt.TextArea jtaFurtherInfo;

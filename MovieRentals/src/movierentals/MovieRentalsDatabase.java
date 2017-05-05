@@ -13,8 +13,11 @@ import javax.swing.JOptionPane;
  * Class with methods and attributes to connect to a database, manipulate
  * database data, and close the connection
  *
- * @author Matija Ozetski, Marko Zivko, Marko Parac, Adi Cengic, Fran Seki
- * @version 1.0
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0 
+ * ISTE-330.700 
+ * prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
  */
 public class MovieRentalsDatabase {
 
@@ -33,12 +36,12 @@ public class MovieRentalsDatabase {
     private DatabaseMetaData metaData = null;
     private PreparedStatement pStatement = null;
 
-    /*
-	 * Parameterized constructor which sets the attributes
-	 * @param userName, the userID
-	 * @param password, the user's password
-	 * @param dbServer, DB server name
-	 * @param dbName, database name
+    /**
+     * Parameterized constructor which sets the attributes
+     * @param userName, the userID
+     * @param password, the user's password
+     * @param dbServer, DB server name
+     * @param dbName, database name
      */
     public MovieRentalsDatabase(String userName, String password, String dbServer, String port, String dbName) {
 
@@ -49,30 +52,45 @@ public class MovieRentalsDatabase {
         this.port = port;
     }
 
-    //setter methods for database connection attributes
+    /**
+     * Method to setUserName
+     * @param newUserName type String
+     */
     public void setUserName(String newUserName) {
         userName = newUserName;
     }
-
+    /**
+     * Method to setPassword
+     * @param newPassword type String
+     */
     public void setPassword(String newPassword) {
         password = newPassword;
     }
-
+    /**
+     * Method to setDatabase server
+     * @param newDBServer  type String
+     */
     public void setDBServer(String newDBServer) {
         dbServer = newDBServer;
     }
-
+    /**
+     * Method to setDatabseName
+     * @param newDBName type String
+     */
     public void setDBName(String newDBName) {
         dbName = newDBName;
     }
-
+    /**
+     * Method to setPort
+     * @param newPort type String
+     */
     public void setPort(String newPort) {
         port = newPort;
     }
 
-    /*
-	 * Method to connect to a database
-	 * @return true or false, depending on connection success
+    /**
+     * Method to connect to a database
+     * @return true or false, depending on connection success
      */
     public boolean connect() throws InfoException {
         try {
@@ -99,9 +117,9 @@ public class MovieRentalsDatabase {
         }
     }
 
-    /*
-	 * Method to close the database connection
-	 * @return true or false, depending on closing success
+    /**
+     * Method to close the database connection
+     * @return true or false, depending on closing success
      */
     public boolean close() throws InfoException {
         try {
@@ -124,11 +142,11 @@ public class MovieRentalsDatabase {
         }
     }
 
-    /*
-	 * Method that queries the database with the given query
-	 * Also stores query results into an array
-	 * @param query, Query to be executed
-	 * @return results, The array populated with query results
+    /**
+     * Method that queries the database with the given query
+     * Also stores query results into an array
+     * @param query, Query to be executed
+     * @return results, The array populated with query results
      */
     public ArrayList<ArrayList<String>> getData(String query) throws InfoException {
         ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
@@ -164,12 +182,12 @@ public class MovieRentalsDatabase {
         return results;
     }
 
-    /*
-	 * Method that queries the database with the given query
-	 * Also stores query results into an array, with an option to store column names 
-	 * @param query, Query to be executed
-	 * @param incColName, boolean for including the column names
-	 * @return results, The array populated with query results
+    /**
+     * Method that queries the database with the given query
+     * Also stores query results into an array, with an option to store column names 
+     * @param query, Query to be executed
+     * @param incColName, boolean for including the column names
+     * @return results, The array populated with query results
      */
     public ArrayList<ArrayList<String>> getData(String query, boolean incColName) throws InfoException {
         ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
@@ -208,9 +226,9 @@ public class MovieRentalsDatabase {
         return results;
     }
 
-    /*
-	 * Method which updates the database with the given query string
-	 * @return true or false, depending on the success of the query
+    /**
+     * Method which updates the database with the given query string
+     * @return true or false, depending on the success of the query
      */
     public boolean setData(String query) throws InfoException {
         try {
@@ -232,11 +250,11 @@ public class MovieRentalsDatabase {
         }
     }
 
-    /*
-	 * Method which initializes the PreparedStatement object for use in other methods
-	 * @param statement, The query to be executed
-	 * @param values, ArrayList with values to be used in the query
-	 * @return pStatement, The PreparedStatement object
+    /**
+     * Method which initializes the PreparedStatement object for use in other methods
+     * @param statement, The query to be executed
+     * @param values, ArrayList with values to be used in the query
+     * @return pStatement, The PreparedStatement object
      */
     public PreparedStatement prepare(String statement, ArrayList<String> values) throws InfoException {
         try {
@@ -259,7 +277,7 @@ public class MovieRentalsDatabase {
         return pStatement;
     }
 
-    /*
+    /**
      * Method that is used to get data from the databse in cases where a select from
      * multiple tables is being performed
      * Allows for the user to specify the number of columns based on the query
@@ -301,12 +319,12 @@ public class MovieRentalsDatabase {
         return data;
     }
 
-    /*
-	 * Method that queries the database with the given query, using a prepared statement
-	 * Also stores query results into an array
-	 * @param statement, The query to be executed
-	 * @param values, ArrayList of values that fill the query
-	 * @return data, 2D ArrayList filled with query results
+    /**
+     * Method that queries the database with the given query, using a prepared statement
+     * Also stores query results into an array
+     * @param statement, The query to be executed
+     * @param values, ArrayList of values that fill the query
+     * @return data, 2D ArrayList filled with query results
      */
     public ArrayList<ArrayList<String>> getData(String statement, ArrayList<String> values) throws InfoException {
         ArrayList<ArrayList<String>> data = null;
@@ -357,12 +375,12 @@ public class MovieRentalsDatabase {
         return data;
     }
 
-    /*
-	 * Method which performs an update on a table based on the given query
-	 * Uses prepared statement
-	 * @param statement, The update query to be executed
-	 * @param values, The ArrayList with query values
-	 * @return true or false, depending on the success of the query
+    /**
+     * Method which performs an update on a table based on the given query
+     * Uses prepared statement
+     * @param statement, The update query to be executed
+     * @param values, The ArrayList with query values
+     * @return true or false, depending on the success of the query
      */
     public boolean setData(String statement, ArrayList<String> values) throws InfoException {
         boolean successful = false;
@@ -393,9 +411,9 @@ public class MovieRentalsDatabase {
         return successful;
     }
 
-    /*
-	 * Method which configures the database to not use auto-commits
-	 * Equivalent of starting a transaction
+    /**
+     * Method which configures the database to not use auto-commits
+     * Equivalent of starting a transaction
      */
     public void startTrans() throws InfoException {
         try {
@@ -408,9 +426,9 @@ public class MovieRentalsDatabase {
         }
     }
 
-    /*
-	 * Method which commits all changes made and ends the transaction
-	 * by enabling auto-commits again
+    /**
+     * Method which commits all changes made and ends the transaction
+     * by enabling auto-commits again
      */
     public void endTrans() {
         try {
@@ -424,9 +442,9 @@ public class MovieRentalsDatabase {
         }
     }
 
-    /*
-	 * Method which rolls back the database to the previous state
-	 * in case something goes wrong when executing statements
+    /**
+     * Method which rolls back the database to the previous state
+     * in case something goes wrong when executing statements
      */
     public void rollbackTrans() {
         try {

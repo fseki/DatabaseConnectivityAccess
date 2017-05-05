@@ -10,6 +10,15 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Class InfoException for logging the exceptions
+ *
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0 
+ * ISTE-330.700 
+ * prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
+ */
 public class InfoException extends Exception {
 
     //attributes to store the exception messages, the 
@@ -47,16 +56,16 @@ public class InfoException extends Exception {
     }
 
     /*
-	 * Method which returns the generic exception message
-	 * @return message, Exception message
+    * Method which returns the generic exception message
+    * @return message, Exception message
      */
     public String getInfo() {
         return message;
     }
 
     /*
-	 * Method which logs exception information to a file
-	 * @param ex, The exception that occured
+     * Method which logs exception information to a file
+    * @param ex, The exception that occured
      */
     public void log(Exception ex) {
         try {

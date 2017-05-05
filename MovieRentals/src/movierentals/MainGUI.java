@@ -25,15 +25,20 @@ import static movierentals.MovieInfoGUI.studioInfoButton;
  * and open the template in the editor.
  */
 /**
+ * Class with GUI for main screen; JFrame form used
  *
- * @author student
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0 
+ * ISTE-330.700 
+ * prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
  */
 public class MainGUI extends javax.swing.JPanel {
 
     private static Movie movie = new Movie();
-
     /**
      * Creates the main GUI
+     * @param db type MovieRentalsDatabase
      */
     public MainGUI(MovieRentalsDatabase db) {
         initComponents();
@@ -310,7 +315,10 @@ public class MainGUI extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Method for button Go 
+     * @param evt 
+     */
     private void jbGoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGoActionPerformed
         inMenu = true;
         if (data != null) {
@@ -340,7 +348,7 @@ public class MainGUI extends javax.swing.JPanel {
                 model.addRow(row);
             }
         }
-
+ 
         jtMovies.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
                 if (event.getValueIsAdjusting() == false) {
@@ -364,7 +372,7 @@ public class MainGUI extends javax.swing.JPanel {
                         if (!hasRented) {
                             jbReturn.setEnabled(false);
                         }
-
+                        //added ActionListener for Rent button
                         jbRent.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent ae) {
                                 ConnectionGUI.getUser().getUserID();
@@ -378,14 +386,14 @@ public class MainGUI extends javax.swing.JPanel {
                                 jbRent.setEnabled(false);
                             }
                         });
-
+                        //added ActionListener for Return Button
                         jbReturn.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent ae) {
                                 loanedMovies.returnMovie(database, movieName, ConnectionGUI.getUser().getUserID());
                                 jbRent.setEnabled(true);
                             }
                         });
-
+                        //added ActionListener for actor info button
                         actorInfoButton.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent ae) {
                                 Actor actor = new Actor();
@@ -397,7 +405,7 @@ public class MainGUI extends javax.swing.JPanel {
                                 jtaFurtherInfo.setText(info);
                             }
                         });
-
+                        //added ActionListener for studio info button
                         studioInfoButton.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent ae) {
                                 Studio studio = new Studio();
@@ -417,7 +425,6 @@ public class MainGUI extends javax.swing.JPanel {
         });
     }//GEN-LAST:event_jbGoActionPerformed
 
-    
     //based on the context, export will perform different things
     //if the user is in the main menu, the movies list will be exported
     //otherwise, movie info will be exported
@@ -430,11 +437,17 @@ public class MainGUI extends javax.swing.JPanel {
             utils.exportMovieInfoToFile(movieInfo);
         }
     }//GEN-LAST:event_jmiExportActionPerformed
-
+    /**
+     * Method for exiting 
+     * @param evt 
+     */
     private void jmiExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiExitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jmiExitActionPerformed
-
+    /**
+     * Method for removing movie from database 
+     * @param evt 
+     */
     private void rmMovFromDbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmMovFromDbActionPerformed
         if (ConnectionGUI.getUser().getUserRole().equals("Administrator")) {
             DeleteMovieGUI delMovGUI = new DeleteMovieGUI();
@@ -452,7 +465,10 @@ public class MainGUI extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_rmMovFromDbActionPerformed
-
+    /**
+     * Method for adding movie to database 
+     * @param evt 
+     */
     private void addMovToDbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMovToDbActionPerformed
         if (ConnectionGUI.getUser().getUserRole().equals("Administrator")) {
             AddMovieGUI addMovGUI = new AddMovieGUI();
@@ -473,11 +489,17 @@ public class MainGUI extends javax.swing.JPanel {
     private static ArrayList<ArrayList<String>> data;
     private static String movieInfo;
     private static boolean inMenu = false;
-
+    /**
+     * Method for return movie object
+     * @return movie type Movie
+     */
     public static Movie returnMovieObj() {
         return movie;
     }
-    
+    /**
+     * Method return array 
+     * @return data type ArrayList<ArrayList<String>>
+     */
     public static ArrayList<ArrayList<String>> returnDataArray(){
         return data;
     }
@@ -521,7 +543,5 @@ public class MainGUI extends javax.swing.JPanel {
     private javax.swing.JTextField jtfSearch;
     private javax.swing.JMenuItem rmMovFromDb;
     // End of variables declaration//GEN-END:variables
-
-
 
 }

@@ -3,34 +3,62 @@ package movierentals;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
+/**
+ * Class Movies on loan check which movies are on loan
+ *
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0 
+ * ISTE-330.700 
+ * prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
+ */
 public class MoviesOnLoan {
 
     private int movie_id;
     private int user_id;
     private String date_due;
     private boolean returned;
-
-    public MoviesOnLoan() {
-
-    }
-
+    /**
+     * Default constructor 
+     * no parameters
+     */
+    public MoviesOnLoan() {}
+    /**
+     * Constructor 
+     * @param mId type integer
+     * @param uId type integer
+     */
     public MoviesOnLoan(int mId, int uId) {
         movie_id = mId;
         user_id = uId;
     }
-
+    /**
+     * Constructor
+     * @param mId type integer 
+     * @param uId type integer
+     * @param newDate type String
+     * @param newReturned type boolean
+     */
     public MoviesOnLoan(int mId, int uId, String newDate, boolean newReturned) {
         movie_id = mId;
         user_id = uId;
         date_due = newDate;
         returned = newReturned;
     }
-
+    /**
+     * Method getUserId
+     * @return 
+     */
     public int getUserId() {
         return user_id;
     }
-
+    /**
+     * Method that check which movies are rented 
+     * @param db type MovieRentalsDatabase
+     * @param movieName type String
+     * @param userID type integer
+     * @return  rented type boolean
+     */
     public boolean hasRentedMovie(MovieRentalsDatabase db, String movieName, int userID) {
         boolean rented = false;
         try {

@@ -4,40 +4,62 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
+/**
+ * Class Movie with  methods; JFrame form used
+ *
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0 
+ * ISTE-330.700 
+ * prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
+ */
 public class Movie {
 
     private int movie_id;
     private String title;
     private String release_date;
     private int age_rating;
-
     private String genre;
     private String studio;
     private int genre_id;
     private int studi0_id;
-
     private boolean rented = false;
-
-    public Movie() {
-
-    }
-
+    /**
+     * Default constructor 
+     * no parameters
+     */
+    public Movie() {}
+    /**
+     * Constructor 
+     * @param id type integer
+     */
     public Movie(int id) {
         movie_id = id;
     }
-
+    /**
+     * Constructor
+     * @param id type integer
+     * @param newTitle type String 
+     * @param newDate type String
+     * @param rating  type integer
+     */
     public Movie(int id, String newTitle, String newDate, int rating) {
         movie_id = id;
         title = newTitle;
         release_date = newDate;
         age_rating = rating;
     }
-
+    /**
+     * Method for setting rented movies
+     * @param rented 
+     */
     public void setRented(boolean rented) {
         this.rented = rented;
     }
-
+    /**
+     *  Method to check is movie rented 
+     * @return rented type boolean
+     */
     public boolean isRented() {
         return rented;
     }
@@ -66,7 +88,6 @@ public class Movie {
         } catch (InfoException ie) {
             System.out.println(ie.getInfo());
         }
-
         return data;
     }
 
@@ -102,7 +123,12 @@ public class Movie {
 
         return data;
     }
-
+    /**
+     * Method fetchTitle
+     * @param db type MovieRentalDatabase
+     * @param id type integer
+     * @return title
+     */
     public String fetchTitle(MovieRentalsDatabase db, int id) {
         ArrayList<ArrayList<String>> data = null;
         ArrayList<ArrayList<String>> dataToReturn = new ArrayList<ArrayList<String>>();
@@ -288,7 +314,11 @@ public class Movie {
         }
         return output;
     }
-
+    /**
+     * Method to print Movies
+     * @param data type ArrayList<ArrayList<String>>
+     * @return result type String
+     */
     public String printMovies(ArrayList<ArrayList<String>> data) {
         String result = "";
 

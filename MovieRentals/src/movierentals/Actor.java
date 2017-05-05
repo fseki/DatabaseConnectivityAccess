@@ -1,7 +1,12 @@
 package movierentals;
-
 import java.util.*;
-
+/**
+ * Actor class to get actor id and information
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0
+ * ISTE-330.700 prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
+ */
 public class Actor {
     
     private int id;
@@ -11,18 +16,31 @@ public class Actor {
     private int age;
     private String placeOfBirth;
     
-    public Actor(){
-        
-    }
-    
+    /**
+     * Default constructor
+     * no parameters
+     */
+    public Actor(){}
+    /**
+     * Method getActorId
+     * @return id type integer
+     */
     private int getActorId(){
         return id;
     }
-    
+    /**
+     * Method setActorId 
+     * @param actorId type integer
+     */
     private void setActorId(int actorId){
         id = actorId;
     }
-    
+    /**
+     * Method getActorInfo
+     * @param db
+     * @param movie_id
+     * @return info type String
+     */
     public String getActorInfo(MovieRentalsDatabase db, int movie_id){
         String info = "";
         ArrayList<ArrayList<String>> data;
@@ -53,7 +71,6 @@ public class Actor {
         catch (InfoException ie){
             System.out.println(ie.getInfo());
         }
-        
         return info;
     }
 }

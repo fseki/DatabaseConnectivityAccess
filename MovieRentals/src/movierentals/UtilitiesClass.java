@@ -10,19 +10,31 @@ import javax.swing.JOptionPane;
  * Class whose object will be in charge of handling some of the program's extra
  * features, like exporting a list of movies to an external file
  */
+/**
+ * UtilitiesClass for exporting movies
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0 
+ * ISTE-330.700 
+ * prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
+ */
 public class UtilitiesClass {
 
     private ArrayList<ArrayList<String>> data;
     private String movieInfo;
     private File fileToExportMovies;
     private File fileToExportMovieInfo;
-
+    /**
+     * Constructor 
+     */
     public UtilitiesClass() {
         fileToExportMovies = new File("movies_list.txt");
-
         fileToExportMovieInfo = new File("movie_info.txt");
     }
-
+    /**
+     * Method that  export movies to a file 
+     * @param dataToExport type ArrayList<ArrayList<String>>
+     */
     public void exportMoviesToFile(ArrayList<ArrayList<String>> dataToExport) {
         data = dataToExport;
         try {
@@ -50,7 +62,10 @@ public class UtilitiesClass {
             System.out.println("The file to which you want to export has not been found.");
         }
     }
-
+    /**
+     * Method to export movie information to a file 
+     * @param infoToExport type String
+     */
     public void exportMovieInfoToFile(String infoToExport) {
         movieInfo = infoToExport;
         try {

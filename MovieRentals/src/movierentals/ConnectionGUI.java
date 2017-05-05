@@ -8,22 +8,23 @@ import javax.swing.JPanel;
 import movierentals.MovieRentalsDatabase;
 import movierentals.User;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
+ * Class with GUI for connection; JFrame form used
  *
- * @author Marko
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0 
+ * ISTE-330.700 
+ * prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
  */
 public class ConnectionGUI extends javax.swing.JFrame {
-    
+
     private static User user;
     private static ConnectionGUI connGUI;
     public static MovieRentalsDatabase database;
 
     /**
+     * Constructor without parameters
      * Creates new form ConnectionGUI
      */
     public ConnectionGUI() {
@@ -170,7 +171,7 @@ public class ConnectionGUI extends javax.swing.JFrame {
 /**
      * @param args the command line arguments
      */
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -194,7 +195,7 @@ public class ConnectionGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ConnectionGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         connGUI = new ConnectionGUI();
 
         /* Create and display the form */
@@ -204,45 +205,51 @@ public class ConnectionGUI extends javax.swing.JFrame {
                 connGUI.setLocationRelativeTo(null);
             }
         });
-        
+        //added actionListener for connection button
         conn_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 database = new MovieRentalsDatabase(ConnectionGUI.wb_name_txt.getText(), wb_pass_txt.getText(), serv_name_txt.getText(), port_num_txt.getText(), db_name_txt.getText());
-                try{
+                try {
                     if (database.connect()) {
-                    user = new User(database);
-                    LoginGUI.main(database);
-                    connGUI.setVisible(false);
-                    connGUI.dispose();
-                }else{
-                    JFrame jfwrong = new JFrame();
-                    JPanel jpwrong = new JPanel();
-                    JLabel jlwrong = new JLabel("Wrong info entered");
-                    jpwrong.add(jlwrong);
-                    jfwrong.add(jpwrong);
-                    jfwrong.setVisible(true);
-                    jfwrong.setLocationRelativeTo(null);
-                    jfwrong.pack();
-                }
-                }
-                catch (InfoException ie){
+                        user = new User(database);
+                        LoginGUI.main(database);
+                        connGUI.setVisible(false);
+                        connGUI.dispose();
+                    } else {
+                        JFrame jfwrong = new JFrame();
+                        JPanel jpwrong = new JPanel();
+                        JLabel jlwrong = new JLabel("Wrong info entered");
+                        jpwrong.add(jlwrong);
+                        jfwrong.add(jpwrong);
+                        jfwrong.setVisible(true);
+                        jfwrong.setLocationRelativeTo(null);
+                        jfwrong.pack();
+                    }
+                } catch (InfoException ie) {
                     System.out.println(ie.getMessage());
-                } 
+                }
             }
         });
-        
     }
-    
+    /**
+     * Method getUser
+     * @return user type User
+     */
     public static User getUser() {
         return user;
     }
-    
-    public static ConnectionGUI getFrame(){
+    /**
+     * Method getFrame 
+     * @return connGUI type ConnectionGUI
+     */
+    public static ConnectionGUI getFrame() {
         return connGUI;
     }
-    
-    public static MovieRentalsDatabase returnDbObj(){
+    /**
+     * Method to return database
+     * @return database type MovieRentalsDatabase
+     */
+    public static MovieRentalsDatabase returnDbObj() {
         return database;
     }
-    
 }

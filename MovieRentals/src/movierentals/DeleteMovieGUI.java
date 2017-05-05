@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package movierentals;
 
 import java.awt.event.ActionEvent;
@@ -14,12 +9,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
+ * Class with GUI for deleting a movie; JFrame form used
  *
- * @author Marko
+ * @authors Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko
+ * @version 1.0 
+ * ISTE-330.700 
+ * prof. Branko Mihaljevic 
+ * RIT Croatia, 2017
  */
 public class DeleteMovieGUI extends javax.swing.JFrame {
 
     /**
+     * Constructor without parameters
      * Creates new form DeleteMovie
      */
     public DeleteMovieGUI() {
@@ -149,10 +150,9 @@ public class DeleteMovieGUI extends javax.swing.JFrame {
                 delMovGUI.setLocationRelativeTo(null);
                 delMovGUI.pack();
                 delMovGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-
             }
         });
-
+        //added actionListener for delete button 
         deleteMovBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -171,10 +171,7 @@ public class DeleteMovieGUI extends javax.swing.JFrame {
                 } else if (choice == JOptionPane.NO_OPTION) {
                     JOptionPane.showMessageDialog(null, "You chose to not delete the movie");
                 }
-
             }
-
         });
     }
-
 }
