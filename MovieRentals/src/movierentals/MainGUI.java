@@ -4,8 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -28,7 +30,9 @@ import static movierentals.MovieInfoGUI.studioInfoButton;
  */
 public class MainGUI extends javax.swing.JPanel {
 
-    private static Movie movie = new Movie();;
+    private static Movie movie = new Movie();
+
+    ;
 
     /**
      * Creates the main GUI
@@ -309,7 +313,7 @@ public class MainGUI extends javax.swing.JPanel {
             data.clear();
         }
         String searchTerm = jtfSearch.getText().trim();
-        
+
         MoviesOnLoan loanedMovies = new MoviesOnLoan();
 
         if (searchTerm.equals("")) {
@@ -382,7 +386,6 @@ public class MainGUI extends javax.swing.JPanel {
                                 Actor actor = new Actor();
                                 int movie_id = Integer.parseInt(data.get(row).get(0));
                                 String info = actor.getActorInfo(database, movie_id);
-                                //System.out.println(info);
                                 FurtherInfoGUI infoGui = new FurtherInfoGUI();
                                 infoGui.setVisible(true);
                                 infoGui.setLocationRelativeTo(null);
@@ -420,20 +423,48 @@ public class MainGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jmiExitActionPerformed
 
     private void rmMovFromDbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmMovFromDbActionPerformed
-        DeleteMovieGUI delMovGUI = new DeleteMovieGUI();
-        delMovGUI.main();
-        
+        if (ConnectionGUI.getUser().getUserRole().equals("Administrator")) {
+            DeleteMovieGUI delMovGUI = new DeleteMovieGUI();
+            delMovGUI.main();
+        } else {
+            JFrame frame = new JFrame();
+            JPanel panel = new JPanel();
+            JLabel label = new JLabel("You are not allowed to do that");
+            panel.add(label);
+            frame.add(panel);
+            frame.setVisible(true);
+            frame.setLocationRelativeTo(null);
+            frame.pack();
+            frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        }
+
     }//GEN-LAST:event_rmMovFromDbActionPerformed
 
     private void addMovToDbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMovToDbActionPerformed
-        AddMovieGUI addMovGUI = new AddMovieGUI();
-        addMovGUI.main();
+        if (ConnectionGUI.getUser().getUserRole().equals("Administrator")) {
+            AddMovieGUI addMovGUI = new AddMovieGUI();
+            addMovGUI.main();
+        } else {
+            JFrame frame = new JFrame();
+            JPanel panel = new JPanel();
+            JLabel label = new JLabel("You are not allowed to do that");
+            panel.add(label);
+            frame.add(panel);
+            frame.setVisible(true);
+            frame.setLocationRelativeTo(null);
+            frame.pack();
+            frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        }
     }//GEN-LAST:event_addMovToDbActionPerformed
 
-    private ArrayList<ArrayList<String>> data;
+    private static ArrayList<ArrayList<String>> data;
 
     public static Movie returnMovieObj() {
         return movie;
+    }
+    
+    public static ArrayList<ArrayList<String>> returnDataArray(){
+        return data;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -471,8 +502,11 @@ public class MainGUI extends javax.swing.JPanel {
     private javax.swing.JMenuItem jmiExport;
     private javax.swing.JPanel jpCenter;
     private javax.swing.JPanel jpSearch;
-    private javax.swing.JTable jtMovies;
+    private static javax.swing.JTable jtMovies;
     private javax.swing.JTextField jtfSearch;
     private javax.swing.JMenuItem rmMovFromDb;
     // End of variables declaration//GEN-END:variables
+
+
+
 }

@@ -50,6 +50,10 @@ public class User {
     public int getUserID() {
         return user_id;
     }
+    
+    public String getUserRole(){
+        return role;
+    }
 
     public boolean login(String newUsername, String newPassword) {
         boolean valid = false;

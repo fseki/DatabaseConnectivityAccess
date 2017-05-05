@@ -9,7 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -153,25 +155,40 @@ public class DeleteMovieGUI extends javax.swing.JFrame {
 
         deleteMovBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //System.out.println(MainGUI.returnMovieObj().toString());
-                System.out.println(ConnectionGUI.returnDbObj().toString());
-                
-                if (MainGUI.returnMovieObj().deleteMovie(ConnectionGUI.returnDbObj(), //if condition
-                        Integer.parseInt(deleteMov_txt.getText()))) {           //
-                    System.out.println("asd");
+
+                int choice = JOptionPane.showConfirmDialog(null, "Would you like to delete " + MainGUI.returnMovieObj().fetchTitle(ConnectionGUI.returnDbObj(),
+                        Integer.parseInt(deleteMov_txt.getText())) + " ?",
+                        "Would you like to delete " + MainGUI.returnMovieObj().fetchTitle(ConnectionGUI.returnDbObj(),
+                                Integer.parseInt(deleteMov_txt.getText())) + " ?", JOptionPane.YES_NO_OPTION);
+
+                if (choice == JOptionPane.YES_OPTION) {
+                    if (MainGUI.returnMovieObj().deleteMovie(ConnectionGUI.returnDbObj(), Integer.parseInt(deleteMov_txt.getText()))) {
+
+                        JFrame frame = new JFrame();
+                        JPanel panel = new JPanel();
+                        JLabel label = new JLabel("Deleting movie successful!");
+                        panel.add(label);
+                        frame.add(panel);
+                        frame.setVisible(true);
+                        frame.setLocationRelativeTo(null);
+                        frame.pack();
+                        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                    } else {
+                        JFrame frame = new JFrame();
+                        JPanel panel = new JPanel();
+                        JLabel label = new JLabel("Deleting movie failed");
+                        panel.add(label);
+                        frame.add(panel);
+                        frame.setVisible(true);
+                        frame.setLocationRelativeTo(null);
+                        frame.pack();
+                        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                    }
+
+                } else if (choice == JOptionPane.NO_OPTION) {
                     JFrame frame = new JFrame();
                     JPanel panel = new JPanel();
-                    JLabel label = new JLabel("Deleting movie successful!");
-                    panel.add(label);
-                    frame.add(panel);
-                    frame.setVisible(true);
-                    frame.setLocationRelativeTo(null);
-                    frame.pack();
-                    frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-                } else {
-                    JFrame frame = new JFrame();
-                    JPanel panel = new JPanel();
-                    JLabel label = new JLabel("Deleting movie failed");
+                    JLabel label = new JLabel("You chose not to delete the movie");
                     panel.add(label);
                     frame.add(panel);
                     frame.setVisible(true);
@@ -179,6 +196,7 @@ public class DeleteMovieGUI extends javax.swing.JFrame {
                     frame.pack();
                     frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                 }
+
             }
 
         });

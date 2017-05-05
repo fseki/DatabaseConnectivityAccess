@@ -145,8 +145,8 @@ public class MovieRentalsDatabase {
                 while (row) {
                     results.add(new ArrayList<String>());
                     for (int i = 1; i <= numCols; i++) {
-                        resultSet.getString(i);
-                        results.get(m).add(resultSet.getString(i));
+                        resultSet.getString(1);
+                        results.get(m).add(resultSet.getString(1));
                     }
                     row = resultSet.next();
                     m++;

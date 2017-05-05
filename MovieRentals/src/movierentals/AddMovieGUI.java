@@ -193,7 +193,7 @@ public class AddMovieGUI extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        
+
         AddMovieGUI addMovGUI = new AddMovieGUI();
 
         /* Create and display the form */
@@ -207,14 +207,13 @@ public class AddMovieGUI extends javax.swing.JFrame {
         });
         addMovieBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("asdasd");
                 System.out.println(MainGUI.returnMovieObj().toString());
                 System.out.println(ConnectionGUI.returnDbObj().toString());
                 if (MainGUI.returnMovieObj().addMovie(ConnectionGUI.returnDbObj(), //big if condition
                         addTitle_txt.getText(), addDate_txt.getText(), //
                         Integer.parseInt(addGenre_txt.getText()), //
                         Integer.parseInt(addStudio_txt.getText()), //
-                        Integer.parseInt(addRating_txt.getText()))) {       //
+                        Integer.parseInt(addRating_txt.getText()))) {               //
                     JFrame frame = new JFrame();
                     JPanel panel = new JPanel();
                     JLabel label = new JLabel("Adding movie successful!");

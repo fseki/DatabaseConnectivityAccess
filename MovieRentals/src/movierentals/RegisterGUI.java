@@ -68,6 +68,11 @@ public class RegisterGUI extends javax.swing.JPanel {
         label1.setText("New User Registration");
 
         regButton.setText("Register");
+        regButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -161,6 +166,10 @@ public class RegisterGUI extends javax.swing.JPanel {
     private void jtfUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfUsernameActionPerformed
+
+    private void regButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_regButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

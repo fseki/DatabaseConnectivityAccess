@@ -119,6 +119,26 @@ public class Movie {
         return data;
     }
 
+    public String fetchTitle(MovieRentalsDatabase db, int id) {
+        ArrayList<ArrayList<String>> data = null;
+        ArrayList<ArrayList<String>> dataToReturn = new ArrayList<ArrayList<String>>();
+        ArrayList<Integer> values = new ArrayList<Integer>();
+        values.add(id);
+
+        String query = "SELECT movie_title from \n"
+                + "movie  WHERE movie_id = " + id;
+
+        try {
+            data = db.getData(query);
+
+            title = data.get(0).get(1);
+        } catch (InfoException ex) {
+            System.out.println(ex.getInfo());
+        }
+        
+        return title;
+    }
+
     /*
      * Method which will be used to insert new movies form the administrator interface
      * @param db, Database object
