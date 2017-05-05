@@ -144,6 +144,9 @@ public class Movie {
             title = data.get(0).get(1);
         } catch (InfoException ex) {
             System.out.println(ex.getInfo());
+        }catch(IndexOutOfBoundsException ioex){
+            //JOptionPane.showMessageDialog(null, "Movie ID doesn't exist!");
+            System.out.println("Movie ID doesn't exist!");
         }
 
         return title;

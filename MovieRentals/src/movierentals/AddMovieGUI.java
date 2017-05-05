@@ -207,7 +207,7 @@ public class AddMovieGUI extends javax.swing.JFrame {
             }
         });
         //added action listener for a add movie button
-        addMovieBtn.addActionListener(new ActionListener() {
+        	 addMovieBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = addTitle_txt.getText().trim();
                 String date = addDate_txt.getText().trim();
@@ -215,6 +215,7 @@ public class AddMovieGUI extends javax.swing.JFrame {
                 String studio = addStudio_txt.getText().trim();
                 String rating = addRating_txt.getText().trim();
 
+               try{
                 if (name.equals("") || name.equals("Enter movie name")) {
                     addTitle_txt.setText("Enter movie name");
                 } else if (date.equals("") || date.equals("Enter release date")) {
@@ -226,16 +227,25 @@ public class AddMovieGUI extends javax.swing.JFrame {
                 } else if (rating.equals("") || rating.equals("Enter age rating")) {
                     addRating_txt.setText("Enter age rating");
                 } else {
-                    if (MainGUI.returnMovieObj().addMovie(ConnectionGUI.returnDbObj(), //big if condition
-                            name, date, //
-                            Integer.parseInt(genre), //
-                            Integer.parseInt(studio), //
-                            Integer.parseInt(rating))) {               //
+                    if (MainGUI.returnMovieObj().addMovie(ConnectionGUI.returnDbObj(),
+                            name, date,
+                            Integer.parseInt(genre),
+                            Integer.parseInt(studio),
+                            Integer.parseInt(rating))) {          
                         JOptionPane.showMessageDialog(null, "Successfully added a movie!");
                     } else {
                         JOptionPane.showMessageDialog(null, "Failed to add a movie...");
                     }
                 }
+               }
+               catch(NumberFormatException numex){
+                   JOptionPane.showMessageDialog(null, "Wrong input, please check your input\n You must enter:"
+                           + "\n Movie Title: String"
+                           + "\n Release Year: Integer"
+                           + "\n Age Rating: Integer"
+                           + "\n Genre ID: Integer"
+                           + "\n Studio ID: Integer");
+               }
             }
         });
     }

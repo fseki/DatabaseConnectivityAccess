@@ -96,6 +96,9 @@ public class MainGUI extends javax.swing.JPanel {
         jmEdit = new javax.swing.JMenu();
         addMovToDb = new javax.swing.JMenuItem();
         rmMovFromDb = new javax.swing.JMenuItem();
+        jmHelp = new javax.swing.JMenu();
+        jmiHowToUse = new javax.swing.JMenuItem();
+        jmiAboutUs = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -281,6 +284,26 @@ public class MainGUI extends javax.swing.JPanel {
         jmEdit.add(rmMovFromDb);
 
         jMenuBar5.add(jmEdit);
+
+        jmHelp.setText("Help");
+
+        jmiHowToUse.setText("How To Use");
+        jmiHowToUse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiHowToUseActionPerformed(evt);
+            }
+        });
+        jmHelp.add(jmiHowToUse);
+
+        jmiAboutUs.setText("About Us");
+        jmiAboutUs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAboutUsActionPerformed(evt);
+            }
+        });
+        jmHelp.add(jmiAboutUs);
+
+        jMenuBar5.add(jmHelp);
 
         jInternalFrame1.setJMenuBar(jMenuBar5);
 
@@ -486,6 +509,22 @@ public class MainGUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_addMovToDbActionPerformed
 
+    private void jmiHowToUseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiHowToUseActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "- Welcome!- \n Here we will guide you how to use Movie Rentals:  \n"
+                + "\n Movie Rentals has a database with movies, if you want to find particular movie just type your movie in the search field. You have to type the whole name of the movie or just click GO! "
+                + "\n Example: 'Taken' \n" 
+                + "\n If you click on the movie you will provieded with informations about movie.\n "
+                + "\n You can export your results as a list in the text file."
+         );
+    }//GEN-LAST:event_jmiHowToUseActionPerformed
+
+    private void jmiAboutUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAboutUsActionPerformed
+        // TODO add your handling code here:
+         JOptionPane.showMessageDialog(null, " - Movie Rentals -\n  \n Desing by: Fran Seki, Marko Parac, Matija Ozetski, Adi Cengic & Marko Zivko\n "
+                + " \n prof. Branko Mihaljevic\n \nAll rights reserved, RIT CROATIA, 2017 ");
+    }//GEN-LAST:event_jmiAboutUsActionPerformed
+
     private static ArrayList<ArrayList<String>> data;
     private static String movieInfo;
     private static boolean inMenu = false;
@@ -535,8 +574,11 @@ public class MainGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jlSearch;
     public static javax.swing.JMenu jmEdit;
     private javax.swing.JMenu jmFile;
+    private javax.swing.JMenu jmHelp;
+    private javax.swing.JMenuItem jmiAboutUs;
     private javax.swing.JMenuItem jmiExit;
     private javax.swing.JMenuItem jmiExport;
+    private javax.swing.JMenuItem jmiHowToUse;
     private javax.swing.JPanel jpCenter;
     private javax.swing.JPanel jpSearch;
     private static javax.swing.JTable jtMovies;

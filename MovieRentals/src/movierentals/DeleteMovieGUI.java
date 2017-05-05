@@ -155,12 +155,12 @@ public class DeleteMovieGUI extends javax.swing.JFrame {
         //added actionListener for delete button 
         deleteMovBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+            try{
                 int choice = JOptionPane.showConfirmDialog(null, "Would you like to delete " + MainGUI.returnMovieObj().fetchTitle(ConnectionGUI.returnDbObj(),
                         Integer.parseInt(deleteMov_txt.getText())) + " ?",
                         "Would you like to delete " + MainGUI.returnMovieObj().fetchTitle(ConnectionGUI.returnDbObj(),
                                 Integer.parseInt(deleteMov_txt.getText())) + " ?", JOptionPane.YES_NO_OPTION);
-
+                
                 if (choice == JOptionPane.YES_OPTION) {
                     if (MainGUI.returnMovieObj().deleteMovie(ConnectionGUI.returnDbObj(), Integer.parseInt(deleteMov_txt.getText()))) {
                         JOptionPane.showMessageDialog(null, "Successfully deleted the movie!");
@@ -171,6 +171,9 @@ public class DeleteMovieGUI extends javax.swing.JFrame {
                 } else if (choice == JOptionPane.NO_OPTION) {
                     JOptionPane.showMessageDialog(null, "You chose to not delete the movie");
                 }
+            }catch(NumberFormatException ex){
+               System.out.println("Movie ID doesn't exits!");
+            }
             }
         });
     }
