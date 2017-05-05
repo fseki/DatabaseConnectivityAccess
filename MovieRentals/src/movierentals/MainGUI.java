@@ -9,6 +9,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import static movierentals.ConnectionGUI.database;
 import static movierentals.FurtherInfoGUI.jtaFurtherInfo;
 import static movierentals.MovieInfoGUI.actorInfoButton;
 import static movierentals.MovieInfoGUI.jbRent;
@@ -34,7 +35,7 @@ public class MainGUI extends javax.swing.JPanel {
      */
     public MainGUI(MovieRentalsDatabase db) {
         initComponents();
-        database = db;
+        ConnectionGUI.database = db;
     }
 
     /**
@@ -340,7 +341,6 @@ public class MainGUI extends javax.swing.JPanel {
                         String movieName = data.get(jtMovies.getSelectedRow()).get(1);
                         String movieInfo = movie.getMovieInfo(database, movieName);
                         MovieInfoGUI.main();
-                        JFrame frame = new JFrame();
                         MovieInfoGUI gui = new MovieInfoGUI();
                         gui.setVisible(true);
                         gui.setLocationRelativeTo(null);
@@ -421,29 +421,19 @@ public class MainGUI extends javax.swing.JPanel {
 
     private void rmMovFromDbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmMovFromDbActionPerformed
         DeleteMovieGUI delMovGUI = new DeleteMovieGUI();
-        delMovGUI.setVisible(true);
-        delMovGUI.setLocationRelativeTo(null);
-        delMovGUI.pack();
-        delMovGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        delMovGUI.main();
+        
     }//GEN-LAST:event_rmMovFromDbActionPerformed
 
     private void addMovToDbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMovToDbActionPerformed
         AddMovieGUI addMovGUI = new AddMovieGUI();
-        addMovGUI.setVisible(true);
-        addMovGUI.setLocationRelativeTo(null);
-        addMovGUI.pack();
-        addMovGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        addMovGUI.main();
     }//GEN-LAST:event_addMovToDbActionPerformed
 
-    private static MovieRentalsDatabase database;
     private ArrayList<ArrayList<String>> data;
 
     public static Movie returnMovieObj() {
         return movie;
-    }
-
-    public static MovieRentalsDatabase returnDbObj() {
-        return database;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

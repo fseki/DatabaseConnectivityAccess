@@ -21,6 +21,7 @@ public class ConnectionGUI extends javax.swing.JFrame {
     
     private static User user;
     private static ConnectionGUI connGUI;
+    public static MovieRentalsDatabase database;
 
     /**
      * Creates new form ConnectionGUI
@@ -206,11 +207,11 @@ public class ConnectionGUI extends javax.swing.JFrame {
         
         conn_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MovieRentalsDatabase myDatabase = new MovieRentalsDatabase(ConnectionGUI.wb_name_txt.getText(), wb_pass_txt.getText(), serv_name_txt.getText(), port_num_txt.getText(), db_name_txt.getText());
+                database = new MovieRentalsDatabase(ConnectionGUI.wb_name_txt.getText(), wb_pass_txt.getText(), serv_name_txt.getText(), port_num_txt.getText(), db_name_txt.getText());
                 try{
-                    if (myDatabase.connect()) {
-                    user = new User(myDatabase);
-                    LoginGUI.main(myDatabase);
+                    if (database.connect()) {
+                    user = new User(database);
+                    LoginGUI.main(database);
                     connGUI.setVisible(false);
                     connGUI.dispose();
                 }else{
@@ -238,6 +239,10 @@ public class ConnectionGUI extends javax.swing.JFrame {
     
     public static ConnectionGUI getFrame(){
         return connGUI;
+    }
+    
+    public static MovieRentalsDatabase returnDbObj(){
+        return database;
     }
     
 }

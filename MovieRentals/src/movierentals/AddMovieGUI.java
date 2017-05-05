@@ -41,11 +41,11 @@ public class AddMovieGUI extends javax.swing.JFrame {
         addDate_txt = new java.awt.TextField();
         addRating_txt = new java.awt.TextField();
         label1 = new java.awt.Label();
-        addMovieBtn = new java.awt.Button();
         addGenre = new java.awt.Label();
         addGenre_txt = new java.awt.TextField();
         addStudio_txt = new java.awt.TextField();
         addStudio = new java.awt.Label();
+        addMovieBtn = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,26 +57,16 @@ public class AddMovieGUI extends javax.swing.JFrame {
 
         label1.setText("Adding movie to database");
 
-        addMovieBtn.setActionCommand("");
-        addMovieBtn.setLabel("Add movie");
-
         addGenre.setText("Add movie genre");
 
         addStudio.setText("Add movie studio");
+
+        addMovieBtn.setLabel("Add movie");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addComponent(addMovieBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(137, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,6 +89,15 @@ public class AddMovieGUI extends javax.swing.JFrame {
                             .addComponent(addTitle_txt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(addRating_txt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(51, 51, 51))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addComponent(addMovieBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,13 +124,10 @@ public class AddMovieGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addStudio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addStudio_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
                 .addComponent(addMovieBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
-
-        addGenre.getAccessibleContext().setAccessibleName("Add movie genre");
-        addStudio.getAccessibleContext().setAccessibleName("Add movie studio");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,7 +169,7 @@ public class AddMovieGUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -197,16 +193,24 @@ public class AddMovieGUI extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        
+        AddMovieGUI addMovGUI = new AddMovieGUI();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddMovieGUI().setVisible(true);
+                addMovGUI.setVisible(true);
+                addMovGUI.setLocationRelativeTo(null);
+                addMovGUI.pack();
+                addMovGUI.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             }
         });
         addMovieBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (MainGUI.returnMovieObj().addMovie(MainGUI.returnDbObj(), //big if condition
+                System.out.println("asdasd");
+                System.out.println(MainGUI.returnMovieObj().toString());
+                System.out.println(ConnectionGUI.returnDbObj().toString());
+                if (MainGUI.returnMovieObj().addMovie(ConnectionGUI.returnDbObj(), //big if condition
                         addTitle_txt.getText(), addDate_txt.getText(), //
                         Integer.parseInt(addGenre_txt.getText()), //
                         Integer.parseInt(addStudio_txt.getText()), //

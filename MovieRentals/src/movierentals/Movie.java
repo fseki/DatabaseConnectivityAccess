@@ -62,7 +62,7 @@ public class Movie {
             release_date = data.get(0).get(2);
             genre = data.get(0).get(3);
             age_rating = Integer.parseInt(data.get(0).get(4));
-            
+
             /*
             for (int i = 0; i < data.size(); i++) {
                 dataToReturn.add(new ArrayList<String>());
@@ -70,7 +70,6 @@ public class Movie {
                     dataToReturn.get(i).add(data.get(i).get(m));
                 }
             }*/
-
         } catch (InfoException ie) {
             System.out.println(ie.getInfo());
         }
@@ -111,7 +110,6 @@ public class Movie {
                         dataToReturn.get(i).add(data.get(i).get(m));
                     }
                 }*/
-
                 //data.get(0).remove(0); //removing the id so that it is not shown in the printout
             }
         } catch (InfoException ex) {
@@ -145,11 +143,12 @@ public class Movie {
                 System.out.println("INSERTED SUCCESSFULLY");
             } else {
                 System.out.println("FAILED TO INSERT");
+                return false;
             }
         } catch (InfoException ex) {
             System.out.println(ex.getInfo());
         }
-        return success;
+        return true;
     }
 
     /*
@@ -160,7 +159,7 @@ public class Movie {
         this.movie_id = movie_id;
         boolean success = false;
         try {
-            
+
             ArrayList<String> values = new ArrayList<String>();
 
             values.add("" + movie_id);
@@ -173,11 +172,12 @@ public class Movie {
                 System.out.println("DELETED SUCCESSFULLY");
             } else {
                 System.out.println("FAILED TO DELETE");
+                return false;
             }
         } catch (InfoException ex) {
             System.out.println(ex.getInfo());
         }
-        return success;
+        return true;
     }
 
     /*
